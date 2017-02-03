@@ -36,11 +36,13 @@
 		<div class="container-fluid" style="padding: 0;">
 
 			<div class="top">
-				<div id="nav-bar" onclick="onNav()" style="position: absolute; top:30px; left: 32px; width: 30px; height: 20px;">
+				<!-- <div id="nav-bar" onclick="onNav()" style="position: absolute; top:30px; left: 32px; width: 30px; height: 20px;">
 					<span class="nav-icon"></span>
 					<span class="nav-icon" style="margin-top: 8px;"></span>
 					<span class="nav-icon" style="margin-top: 16px;"></span>
-				</div>
+				</div> -->
+
+				<img src="img/ic_home_48.png" alt="HOME" width="32px" height="32px" onclick="onNav()" style="position: absolute; top: 25px; left: 25px; ">
 
 				<div class="row-fluid">
 					<div class="span12" style="color: #FFFFFF;">
@@ -137,7 +139,8 @@
 	<script type="text/javascript">
 
 		function onNav () {
-    		history.back();
+    		// history.back();
+			window.location.href='http://www.liuyingpeng.cc/';
     	}
 	</script>
 </html>
