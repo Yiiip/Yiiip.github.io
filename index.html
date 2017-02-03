@@ -92,7 +92,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><em>（摘自：<a href="http://blog.csdn.net/figo645/article/details/47975493）" target="_blank" rel="external">http://blog.csdn.net/figo645/article/details/47975493）</a></em></p>
+        <p><em>（摘自：<a href="http://blog.csdn.net/figo645/article/details/47975493）">http://blog.csdn.net/figo645/article/details/47975493）</a></em></p>
 <p>设计嵌套评论数据库表可仿效无限级分类，在表中加一个ParentId字段。嵌套评论页面大致这样：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">评论1</div><div class="line">    回复评论1</div><div class="line">    恢复评论1</div><div class="line">评论2</div><div class="line">    回复评论2   </div><div class="line">评论3</div><div class="line">......</div></pre></td></tr></table></figure>
 <p>但是，在显示评论的时候，如果使用ParentId会涉及到多表的联结，嵌套层级越多意味着表之间的联结增多，这样会影响查询效率。</p>
@@ -100,15 +100,12 @@
 <p>设计数据库和表：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">create database NestedCommnets</div><div class="line">use NestedCommnets</div><div class="line">create table UserComments(</div><div class="line">    Id int not null identity(1, 1),</div><div class="line">    ParentId int not null,</div><div class="line">    Content nvarchar(100) not null,</div><div class="line">    Depth smallint not null,</div><div class="line">    Thread nvarchar(max) not null</div><div class="line">)</div></pre></td></tr></table></figure>
 <p>往数据库表中添加如下数据：<br><img src="http://img.blog.csdn.net/20170203153201832?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片"></p>
-<p>Thread字段以”/“分隔，罗列了所有的父级Id。<br>Depth字段显示的是层级。</p>
-<p><strong>查询所有的评论：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select SPACE(u.Depth*6) + u.Content as 评论 from UserComments as u</div></pre></td></tr></table></figure>
-<p>（注：space()是SQL的函数： 返回一个字符串，其中包含N个空格字符。）<br><img src="http://img.blog.csdn.net/20170203153739298?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片"></p>
-<p>如果希望结合<strong>Thread和Depth字段进行排序</strong>：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">select</div><div class="line">SPACE(u.Depth*6) + u.Content as 评论,</div><div class="line">u.Thread + LTRIM(STR(u.Depth,100,0)) as 排序</div><div class="line">from UserComments as u</div><div class="line">order by u.Thread + LTRIM(STR(u.Depth,100,0))</div></pre></td></tr></table></figure>
-<p>（注：<br>STR(nExpression [, nLength [, nDecimalPlaces]])函数：返回与指定表达式对应的字符串；<br>nLength函数：返回的字符串长度；<br>nDecimalPlaces函数：返回字符串的小数位数<br>）</p>
-<p><img src="http://img.blog.csdn.net/20170203154049753?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片"></p>
-
+<p>Thread字段以”/“分隔，罗列了所有的父级Id。<br>Depth字段显示的是层级。
+        
+          <p class="article-more-link">
+            <a href="/2017/02/03/嵌套评论的数据库表设计（路径枚举）/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
