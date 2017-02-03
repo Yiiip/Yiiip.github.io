@@ -70,6 +70,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-嵌套评论的数据库表设计（路径枚举）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/03/嵌套评论的数据库表设计（路径枚举）/" class="article-date">
+  <time datetime="2017-02-03T07:23:03.000Z" itemprop="datePublished">2017-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/03/嵌套评论的数据库表设计（路径枚举）/">嵌套评论的数据库表设计（路径枚举）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><em>（摘自：<a href="http://blog.csdn.net/figo645/article/details/47975493）" target="_blank" rel="external">http://blog.csdn.net/figo645/article/details/47975493）</a></em></p>
+<p>设计嵌套评论数据库表可仿效无限级分类，在表中加一个ParentId字段。嵌套评论页面大致这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">评论1</div><div class="line">    回复评论1</div><div class="line">    恢复评论1</div><div class="line">评论2</div><div class="line">    回复评论2   </div><div class="line">评论3</div><div class="line">......</div></pre></td></tr></table></figure>
+<p>但是，在显示评论的时候，如果使用ParentId会涉及到多表的联结，嵌套层级越多意味着表之间的联结增多，这样会影响查询效率。</p>
+<p>于是，我们想到在表中增加一个字段，用来显示所有的层级：/1/2/5/</p>
+<p>设计数据库和表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">create database NestedCommnets</div><div class="line">use NestedCommnets</div><div class="line">create table UserComments(</div><div class="line">    Id int not null identity(1, 1),</div><div class="line">    ParentId int not null,</div><div class="line">    Content nvarchar(100) not null,</div><div class="line">    Depth smallint not null,</div><div class="line">    Thread nvarchar(max) not null</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>往数据库表中添加如下数据：<br><img src="http://img.blog.csdn.net/20170203153201832?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片"></p>
+<p>Thread字段以”/“分隔，罗列了所有的父级Id。<br>Depth字段显示的是层级。</p>
+<p><strong>查询所有的评论：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select SPACE(u.Depth*6) + u.Content as 评论 from UserComments as u</div></pre></td></tr></table></figure>
+<p>（注：space()是SQL的函数： 返回一个字符串，其中包含N个空格字符。）<br><img src="http://img.blog.csdn.net/20170203153739298?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片"></p>
+<p>如果希望结合<strong>Thread和Depth字段进行排序</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">select</div><div class="line">SPACE(u.Depth*6) + u.Content as 评论,</div><div class="line">u.Thread + LTRIM(STR(u.Depth,100,0)) as 排序</div><div class="line">from UserComments as u</div><div class="line">order by u.Thread + LTRIM(STR(u.Depth,100,0))</div></pre></td></tr></table></figure>
+<p>（注：<br>STR(nExpression [, nLength [, nDecimalPlaces]])函数：返回与指定表达式对应的字符串；<br>nLength函数：返回的字符串长度；<br>nDecimalPlaces函数：返回字符串的小数位数<br>）</p>
+<p><img src="http://img.blog.csdn.net/20170203154049753?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/03/嵌套评论的数据库表设计（路径枚举）/" data-id="ciypi7z0c0005usnzkeuz7nau" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-在数据库中存储层级结构" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/01/在数据库中存储层级结构/" class="article-date">
@@ -106,10 +160,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/01/在数据库中存储层级结构/" data-id="ciymnasx50002t4nzpe89m20t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/01/在数据库中存储层级结构/" data-id="ciypi7z010001usnzh31p7tlh" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计-理论篇/">数据库设计-理论篇</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
 
     </footer>
   </div>
@@ -154,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/30/RESTful架构与接口设计/" data-id="ciymnaswy0000t4nzhn6ee4fv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/01/30/RESTful架构与接口设计/" data-id="ciypi7z040002usnzt4qy4qo8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/接口设计/">接口设计</a></li></ul>
@@ -204,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/24/那些和日期息息相关的方法/" data-id="ciymnasxj0005t4nz8iupzvat" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/01/24/那些和日期息息相关的方法/" data-id="ciypi7z0e0006usnzxa72ricb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -245,44 +299,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/11/Android网络基础-天气预报demo/" data-id="ciymnasx20001t4nzmkogfoen" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-搭建博客的原因及愿景" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/05/06/搭建博客的原因及愿景/" class="article-date">
-  <time datetime="2016-05-06T09:00:25.000Z" itemprop="datePublished">2016-05-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/06/搭建博客的原因及愿景/">搭建博客的原因及愿景</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>开这个博客是一个为了给平日的开发做笔记，记录安卓开发的知识点、实用技巧等，再一个是提高自己的文档编写能力，同时把文章分享给广大的开发者网友，希望能达到互相交流和促进的目的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/06/搭建博客的原因及愿景/" data-id="ciymnasx70003t4nzbky0gc57" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/11/Android网络基础-天气预报demo/" data-id="ciypi7yzx0000usnz3gwbfck2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -293,6 +310,10 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -304,7 +325,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口设计/">接口设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库设计-理论篇/">数据库设计-理论篇</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口设计/">接口设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
     </div>
   </div>
 
@@ -314,7 +335,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/接口设计/" style="font-size: 10px;">接口设计</a> <a href="/tags/数据库设计-理论篇/" style="font-size: 10px;">数据库设计-理论篇</a>
+      <a href="/tags/接口设计/" style="font-size: 10px;">接口设计</a> <a href="/tags/数据库设计/" style="font-size: 20px;">数据库设计</a>
     </div>
   </div>
 
@@ -336,6 +357,10 @@
       <ul>
         
           <li>
+            <a href="/2017/02/03/嵌套评论的数据库表设计（路径枚举）/">嵌套评论的数据库表设计（路径枚举）</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/01/在数据库中存储层级结构/">在数据库中存储层级结构</a>
           </li>
         
@@ -349,10 +374,6 @@
         
           <li>
             <a href="/2016/05/11/Android网络基础-天气预报demo/">Android网络基础 - 天气预报demo</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/06/搭建博客的原因及愿景/">搭建博客的原因及愿景</a>
           </li>
         
       </ul>
