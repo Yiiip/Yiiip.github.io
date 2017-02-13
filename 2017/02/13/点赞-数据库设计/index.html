@@ -5,46 +5,37 @@
   
   <title>点赞 数据库设计 | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、    现在实现了点赞功能，
+  <meta name="description" content="1、Q：
+现在实现了点赞功能，
 主要涉及了两个表，
 一个保存被点的数量，另一个是某一个对哪些点了赞。
 
 现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-建议增加点赞表, 字段列表:
-用户id,
-主题id,
-点赞时间,
-状态. 0-已取消赞  1-有效赞
-就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的方式。这样的记录数会特别多">
+A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时间,    状态 0-已取消赞  1-有效赞。
+就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="点赞 数据库设计">
 <meta property="og:url" content="http://yoursite.com/2017/02/13/点赞-数据库设计/index.html">
 <meta property="og:site_name" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
-<meta property="og:description" content="1、    现在实现了点赞功能，
+<meta property="og:description" content="1、Q：
+现在实现了点赞功能，
 主要涉及了两个表，
 一个保存被点的数量，另一个是某一个对哪些点了赞。
 
 现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-建议增加点赞表, 字段列表:
-用户id,
-主题id,
-点赞时间,
-状态. 0-已取消赞  1-有效赞
-就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的方式。这样的记录数会特别多">
-<meta property="og:updated_time" content="2017-02-13T12:32:59.897Z">
+A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时间,    状态 0-已取消赞  1-有效赞。
+就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的">
+<meta property="og:updated_time" content="2017-02-13T14:43:04.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="点赞 数据库设计">
-<meta name="twitter:description" content="1、    现在实现了点赞功能，
+<meta name="twitter:description" content="1、Q：
+现在实现了点赞功能，
 主要涉及了两个表，
 一个保存被点的数量，另一个是某一个对哪些点了赞。
 
 现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-建议增加点赞表, 字段列表:
-用户id,
-主题id,
-点赞时间,
-状态. 0-已取消赞  1-有效赞
-就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的方式。这样的记录数会特别多">
+A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时间,    状态 0-已取消赞  1-有效赞。
+就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的">
   
     <link rel="alternate" href="/" title="北冥有鸟，其名为鹏 | Liu Yingpeng" type="application/atom+xml">
   
@@ -121,20 +112,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1、<br>    现在实现了点赞功能，</p>
-<pre><code>主要涉及了两个表，
+        <p>1、Q：</p>
+<pre><code>现在实现了点赞功能，
+主要涉及了两个表，
 一个保存被点的数量，另一个是某一个对哪些点了赞。
 
 现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-建议增加点赞表, 字段列表:
-用户id,
-主题id,
-点赞时间,
-状态. 0-已取消赞  1-有效赞
-</code></pre><p>就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的方式。这样的记录数会特别多，每一个用户赞过的每一条微博都会有一条记录，如果真的像新博微博业务量那么大的话，就要考虑做分库分表（即sharding）了。这种方案就复杂多了，我也没做过。你再根据你的业务情况考虑一下吧。<br><a id="more"></a></p>
-<p>2、</p>
+</code></pre><p>A：<br>建议增加点赞表, 字段列表:<br>    用户id,<br>    主题id,<br>    点赞时间,<br>    状态 0-已取消赞  1-有效赞。</p>
+<p>就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的方式。这样的记录数会特别多，每一个用户赞过的每一条微博都会有一条记录，如果真的像新博微博业务量那么大的话，就要考虑做分库分表（即sharding）了。这种方案就复杂多了，我也没做过。你再根据你的业务情况考虑一下吧。<br><a id="more"></a></p>
+<p>2、Q：</p>
 <pre><code>数据库设计 类似微博中的内容和评论、点赞等需要分离出两个表吗？
-</code></pre><p>应用需求类似微博这样，用户发布一条微博，数据分为两类<br>1、内容：内容、日期、与其用户发布的地理位置等等。这些数据基本没啥变动。应该叫冷数据<br>2、点赞、评论数等。这些数据频繁变动，应该叫热数据。</p>
+</code></pre><p>A：<br>应用需求类似微博这样，用户发布一条微博，数据分为两类<br>1、内容：内容、日期、与其用户发布的地理位置等等。这些数据基本没啥变动。应该叫冷数据<br>2、点赞、评论数等。这些数据频繁变动，应该叫热数据。</p>
 <p>我现在的疑问就是：针对这个场景，如何设计数据库？<br>需要分成两个表吗？一个表读比较多，一个表写比较多，这样分出来是不是有好处？</p>
 <p>冷热数据物理存储分开存储的思路是对的，冷热数据读写特性不同（冷数据的读写比例高于热数据），分开储存之后可以采用不同的cache策略，冷数据因为更新少可以直接同步一份至redis这类NOSQL服务，业务层直接从redis读取，减少对mysqldb的压力；热数据因更新较频繁，可以根据用户id（或者说uin）hash到多台写服务，并先写至写服务器的本地缓存中，再异步定时批量更新至mysql，减少对mysql的写压力。</p>
 <p><br><br><em>（转载自<a href="http://blog.csdn.net/u010098331/article/details/51446102）" target="_blank" rel="external">http://blog.csdn.net/u010098331/article/details/51446102）</a></em></p>
@@ -142,7 +130,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/点赞-数据库设计/" data-id="ciz42wjrm000au8nzyww6efh4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/13/点赞-数据库设计/" data-id="ciz48tu8n000c4wnzro8dz2mg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
@@ -152,6 +140,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/02/13/关注互粉MySQL实现/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关注互粉MySQL实现
+        
+      </div>
+    </a>
   
   
     <a href="/2017/02/13/App的开发阶段及需要的角色/" id="article-nav-older" class="article-nav-link-wrap">
@@ -207,6 +204,10 @@
       <ul>
         
           <li>
+            <a href="/2017/02/13/关注互粉MySQL实现/">关注互粉MySQL实现</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/13/点赞-数据库设计/">点赞 数据库设计</a>
           </li>
         
@@ -220,10 +221,6 @@
         
           <li>
             <a href="/2017/02/03/嵌套评论的数据库表设计（路径枚举）/">嵌套评论的数据库表设计（路径枚举）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/01/在数据库中存储层级结构/">在数据库中存储层级结构</a>
           </li>
         
       </ul>
