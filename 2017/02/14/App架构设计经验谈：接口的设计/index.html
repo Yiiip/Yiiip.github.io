@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>App架构设计经验谈：接口的设计 | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="App与服务器的通信接口如何设计得好，需要考虑的地方挺多的，在此根据我的一些经验做一些总结分享，旨在抛砖引玉。
+1. 安全机制的设计现在，大部分App的接口都采用RESTful架构，RESTFul最重要的一个设计原则就是，客户端与服务器的交互在请求之间是无状态的，也就是说，当涉及到用户状态时，每次请求都要带上身份验证信息。实现上，大部分都采用token的认证方式，一般流程是：
+
+用户用密码登录成功">
+<meta property="og:type" content="article">
+<meta property="og:title" content="App架构设计经验谈：接口的设计">
+<meta property="og:url" content="http://yoursite.com/2017/02/14/App架构设计经验谈：接口的设计/index.html">
+<meta property="og:site_name" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
+<meta property="og:description" content="App与服务器的通信接口如何设计得好，需要考虑的地方挺多的，在此根据我的一些经验做一些总结分享，旨在抛砖引玉。
+1. 安全机制的设计现在，大部分App的接口都采用RESTful架构，RESTFul最重要的一个设计原则就是，客户端与服务器的交互在请求之间是无状态的，也就是说，当涉及到用户状态时，每次请求都要带上身份验证信息。实现上，大部分都采用token的认证方式，一般流程是：
+
+用户用密码登录成功">
+<meta property="og:updated_time" content="2017-02-14T13:47:03.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="App架构设计经验谈：接口的设计">
+<meta name="twitter:description" content="App与服务器的通信接口如何设计得好，需要考虑的地方挺多的，在此根据我的一些经验做一些总结分享，旨在抛砖引玉。
+1. 安全机制的设计现在，大部分App的接口都采用RESTful架构，RESTFul最重要的一个设计原则就是，客户端与服务器的交互在请求之间是无状态的，也就是说，当涉及到用户状态时，每次请求都要带上身份验证信息。实现上，大部分都采用token的认证方式，一般流程是：
+
+用户用密码登录成功">
+  
+    <link rel="alternate" href="/" title="北冥有鸟，其名为鹏 | Liu Yingpeng" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">北冥有鸟，其名为鹏 | Liu Yingpeng</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Android开发笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/aboutme">个人简历</a>
+        
+          <a class="main-nav-link" href="http://blog.csdn.net/skipperkevin">CSDN博客</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-App架构设计经验谈：接口的设计" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/14/App架构设计经验谈：接口的设计/" class="article-date">
+  <time datetime="2017-02-14T13:34:29.000Z" itemprop="datePublished">2017-02-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      App架构设计经验谈：接口的设计
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>App与服务器的通信接口如何设计得好，需要考虑的地方挺多的，在此根据我的一些经验做一些总结分享，旨在抛砖引玉。</p>
+<h2 id="1-安全机制的设计"><a href="#1-安全机制的设计" class="headerlink" title="1. 安全机制的设计"></a>1. 安全机制的设计</h2><p>现在，大部分App的接口都采用RESTful架构，RESTFul最重要的一个设计原则就是，客户端与服务器的交互在请求之间是无状态的，也就是说，当涉及到用户状态时，每次请求都要带上身份验证信息。实现上，大部分都采用token的认证方式，一般流程是：</p>
+<ol>
+<li>用户用密码登录成功后，服务器返回token给客户端；</li>
+<li>客户端将token保存在本地，发起后续的相关请求时，将token发回给服务器；</li>
+<li>服务器检查token的有效性，有效则返回数据，若无效，分两种情况：</li>
+</ol>
+<ul>
+<li>token错误，这时需要用户重新登录，获取正确的token</li>
+<li>token过期，这时客户端需要再发起一次认证请求，获取新的token</li>
+</ul>
+<p>然而，此种验证方式存在一个安全性问题：当登录接口被劫持时，黑客就获取到了用户密码和token，后续则可以对该用户做任何事情了。用户只有修改密码才能夺回控制权。<br><a id="more"></a></p>
+<p>如何优化呢？第一种解决方案是采用HTTPS。HTTPS在HTTP的基础上添加了SSL安全协议，自动对数据进行了压缩加密，在一定程序可以防止监听、防止劫持、防止重发，安全性可以提高很多。不过，SSL也不是绝对安全的，也存在被劫持的可能。另外，服务器对HTTPS的配置相对有点复杂，还需要到CA申请证书，而且一般还是收费的。而且，HTTPS效率也比较低。一般，只有安全要求比较高的系统才会采用HTTPS，比如银行。而大部分对安全要求没那么高的App还是采用HTTP的方式。</p>
+<p>我们目前的做法是给每个接口都添加签名。给客户端分配一个密钥，每次请求接口时，将密钥和所有参数组合成源串，根据签名算法生成签名值，发送请求时将签名一起发送给服务器验证。类似的实现可参考OAuth1.0的签名算法。这样，黑客不知道密钥，不知道签名算法，就算拦截到登录接口，后续请求也无法成功操作。不过，因为签名算法比较麻烦，而且容易出错，只适合对内的接口。如果你们的接口属于开放的API，则不太适合这种签名认证的方式了，建议还是使用OAuth2.0的认证机制。</p>
+<p>我们也给每个端分配一个appKey，比如Android、iOS、微信三端，每个端分别分配一个appKey和一个密钥。没有传appKey的请求将报错，传错了appKey的请求也将报错。这样，安全性方面又加多了一层防御，同时也方便对不同端做一些不同的处理策略。</p>
+<p>另外，现在越来越多App取消了密码登录，而采用手机号+短信验证码的登录方式，我在当前的项目中也采用了这种登录方式。这种登录方式有几种好处：</p>
+<ol>
+<li>不需要注册，不需要修改密码，也不需要因为忘记密码而重置密码的操作了；</li>
+<li>用户不再需要记住密码了，也不怕密码泄露的问题了；</li>
+<li><p>相对于密码登录其安全性明显提高了。</p>
+</li>
+<li><p>接口数据的设计</p>
+</li>
+</ol>
+<hr>
+<p>接口的数据一般都采用JSON格式进行传输，不过，需要注意的是，JSON的值只有六种数据类型：</p>
+<ul>
+<li>Number：整数或浮点数</li>
+<li>String：字符串</li>
+<li>Boolean：true 或 false</li>
+<li>Array：数组包含在方括号[]中</li>
+<li>Object：对象包含在大括号{}中</li>
+<li>Null：空类型</li>
+</ul>
+<p>所以，传输的数据类型不能超过这六种数据类型。以前，我们曾经试过传输Date类型，它会转为类似于”2016年1月7日 09时17分42秒 GMT+08:00″这样的字符串，这在转换时会产生问题，不同的解析库解析方式可能不同，有的可能会转乱，有的可能直接异常了。要避免出错，必须做特殊处理，自己手动去做解析。为了根除这种问题，最好的解决方案是用毫秒数表示日期。</p>
+<p>另外，以前的项目中还出现过字符串的”true”和”false”，或者字符串的数字，甚至还出现过字符串的”null”，导致解析错误，尤其是”null”，导致App奔溃，后来查了好久才查出来是该问题导致的。这都是因为服务端对数据没处理好，导致有些数据转为了字符串。所以，在客户端，也不能完全信任服务端传回的数据都是对的，需要对所有异常情况都做相应处理。</p>
+<p>服务器返回的数据结构，一般为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    code：0</div><div class="line">    message: &quot;success&quot;</div><div class="line">    data: &#123; key1: value1, key2: value2, ... &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>code: 状态码，0表示成功，非0表示各种不同的错误</li>
+<li>message: 描述信息，成功时为”success”，错误时则是错误信息</li>
+<li>data: 成功时返回的数据，类型为对象或数据</li>
+</ul>
+<p>不同错误需要定义不同的状态码，属于客户端的错误和服务端的错误也要区分，比如1XX表示客户端的错误，2XX表示服务端的错误。这里举几个例子：</p>
+<ul>
+<li>0：成功</li>
+<li>100：请求错误</li>
+<li>101：缺少appKey</li>
+<li>102：缺少签名</li>
+<li>103：缺少参数</li>
+<li>200：服务器出错</li>
+<li>201：服务不可用</li>
+<li>202：服务器正在重启</li>
+</ul>
+<p>错误信息一般有两种用途：一是客户端开发人员调试时看具体是什么错误；二是作为App错误提示直接展示给用户看。主要还是作为App错误提示，直接展示给用户看的。所以，大部分都是简短的提示信息。</p>
+<p>data字段只在请求成功时才会有数据返回的。数据类型限定为对象或数组，当请求需要的数据为单个对象时则传回对象，当请求需要的数据是列表时，则为某个对象的数组。这里需要注意的就是，不要将data传入字符串或数字，即使请求需要的数据只有一个，比如token，那返回的data应该为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 正确</div><div class="line">data: &#123; token: 123456 &#125;</div><div class="line"></div><div class="line">// 错误</div><div class="line">data: 123456</div></pre></td></tr></table></figure>
+<h2 id="接口版本的设计"><a href="#接口版本的设计" class="headerlink" title="接口版本的设计"></a>接口版本的设计</h2><p>接口不可能一成不变，在不停迭代中，总会发生变化。接口的变化一般会有几种：</p>
+<ul>
+<li>数据的变化，比如增加了旧版本不支持的数据类型</li>
+<li>参数的变化，比如新增了参数</li>
+<li>接口的废弃，不再使用该接口了</li>
+</ul>
+<p>为了适应这些变化，必须得做接口版本的设计。实现上，一般有两种做法：</p>
+<ol>
+<li>每个接口有各自的版本，一般为接口添加个version的参数。</li>
+<li>整个接口系统有统一的版本，一般在URL中添加版本号，比如<a href="http://api.domain.com/v2。" target="_blank" rel="external">http://api.domain.com/v2。</a></li>
+</ol>
+<p>大部分情况下会采用第一种方式，当某一个接口有变动时，在这个接口上叠加版本号，并兼容旧版本。App的新版本开发传参时则将传入新版本的version。</p>
+<p>如果整个接口系统的根基都发生变动的话，比如微博API，从OAuth1.0升级到OAuth2.0，整个API都进行了升级。</p>
+<p>有时候，一个接口的变动还会影响到其他接口，但做的时候不一定能发现。因此，最好还要有一套完善的测试机制保证每次接口变更都能测试到所有相关层面。</p>
+<p><br><br>（<em>本文来源：<a href="http://keeganlee.me/post/architecture/20160107" target="_blank" rel="external">http://keeganlee.me/post/architecture/20160107</a></em>）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/14/App架构设计经验谈：接口的设计/" data-id="ciz5l20p900015snzbapot1jl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/接口设计/">接口设计</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/13/关注互粉MySQL实现/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">关注互粉MySQL实现</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android自定义控件/">Android自定义控件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口设计/">接口设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库设计/">数据库设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目经验/">项目经验</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android自定义控件/" style="font-size: 10px;">Android自定义控件</a> <a href="/tags/接口设计/" style="font-size: 15px;">接口设计</a> <a href="/tags/数据库设计/" style="font-size: 20px;">数据库设计</a> <a href="/tags/项目经验/" style="font-size: 10px;">项目经验</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/14/App架构设计经验谈：接口的设计/">App架构设计经验谈：接口的设计</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/关注互粉MySQL实现/">关注互粉MySQL实现</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/点赞-数据库设计/">点赞 数据库设计</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/13/App的开发阶段及需要的角色/">App的开发阶段及需要的角色</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/03/SettingBar - Android自定义控件/">SettingBar - Android自定义控件</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liu Yingpeng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">个人简历</a>
+  
+    <a href="http://blog.csdn.net/skipperkevin" class="mobile-nav-link">CSDN博客</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

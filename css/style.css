@@ -308,6 +308,7 @@ body {
   font-weight: bold;
 }
 #header {
+  font-family: "MicrosoftYaHei";
   height: 300px;
   position: relative;
   border-bottom: 1px solid #ddd;
