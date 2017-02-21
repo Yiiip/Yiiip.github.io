@@ -3,39 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>点赞 数据库设计 | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
+  <title>标签系统 数据库设计 | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、Q：
-现在实现了点赞功能，
-主要涉及了两个表，
-一个保存被点的数量，另一个是某一个对哪些点了赞。
-
-现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时间,    状态 0-已取消赞  1-有效赞。
-就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的">
+  <meta name="description" content="（来自http://blog.csdn.net/u010098331/article/details/51446245）
+需求背景目前主流的博客系统、CMS都会有一个TAG标签系统，不仅可以让内容链接的结构化增强，而且可以让文章根据Tag来区分。相比传统老式的Keyword模式，这种Tag模式可以单独的设计一个Map的映射表来增加系统的负载和查询的效率。
+数据库设计方案11.Tag表2.文章表
+T">
 <meta property="og:type" content="article">
-<meta property="og:title" content="点赞 数据库设计">
-<meta property="og:url" content="http://yoursite.com/2017/02/13/点赞-数据库设计/index.html">
+<meta property="og:title" content="标签系统 数据库设计">
+<meta property="og:url" content="http://yoursite.com/2017/02/21/标签系统-数据库设计/index.html">
 <meta property="og:site_name" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
-<meta property="og:description" content="1、Q：
-现在实现了点赞功能，
-主要涉及了两个表，
-一个保存被点的数量，另一个是某一个对哪些点了赞。
-
-现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时间,    状态 0-已取消赞  1-有效赞。
-就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的">
-<meta property="og:updated_time" content="2017-02-13T14:43:04.577Z">
+<meta property="og:description" content="（来自http://blog.csdn.net/u010098331/article/details/51446245）
+需求背景目前主流的博客系统、CMS都会有一个TAG标签系统，不仅可以让内容链接的结构化增强，而且可以让文章根据Tag来区分。相比传统老式的Keyword模式，这种Tag模式可以单独的设计一个Map的映射表来增加系统的负载和查询的效率。
+数据库设计方案11.Tag表2.文章表
+T">
+<meta property="og:updated_time" content="2017-02-21T12:05:43.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="点赞 数据库设计">
-<meta name="twitter:description" content="1、Q：
-现在实现了点赞功能，
-主要涉及了两个表，
-一个保存被点的数量，另一个是某一个对哪些点了赞。
-
-现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时间,    状态 0-已取消赞  1-有效赞。
-就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的">
+<meta name="twitter:title" content="标签系统 数据库设计">
+<meta name="twitter:description" content="（来自http://blog.csdn.net/u010098331/article/details/51446245）
+需求背景目前主流的博客系统、CMS都会有一个TAG标签系统，不仅可以让内容链接的结构化增强，而且可以让文章根据Tag来区分。相比传统老式的Keyword模式，这种Tag模式可以单独的设计一个Map的映射表来增加系统的负载和查询的效率。
+数据库设计方案11.Tag表2.文章表
+T">
   
     <link rel="alternate" href="/" title="北冥有鸟，其名为鹏 | Liu Yingpeng" type="application/atom+xml">
   
@@ -92,10 +80,10 @@ A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时�
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-点赞-数据库设计" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-标签系统-数据库设计" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/13/点赞-数据库设计/" class="article-date">
-  <time datetime="2017-02-13T12:25:44.000Z" itemprop="datePublished">2017-02-13</time>
+    <a href="/2017/02/21/标签系统-数据库设计/" class="article-date">
+  <time datetime="2017-02-21T11:59:16.000Z" itemprop="datePublished">2017-02-21</time>
 </a>
     
   </div>
@@ -106,7 +94,7 @@ A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时�
         
   
     <h1 class="article-title" itemprop="name">
-      点赞 数据库设计
+      标签系统 数据库设计
     </h1>
   
 
@@ -114,25 +102,40 @@ A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>1、Q：</p>
-<pre><code>现在实现了点赞功能，
-主要涉及了两个表，
-一个保存被点的数量，另一个是某一个对哪些点了赞。
-
-现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
-</code></pre><p>A：<br>建议增加点赞表, 字段列表:<br>    用户id,<br>    主题id,<br>    点赞时间,<br>    状态 0-已取消赞  1-有效赞。</p>
-<p>就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的方式。这样的记录数会特别多，每一个用户赞过的每一条微博都会有一条记录，如果真的像新博微博业务量那么大的话，就要考虑做分库分表（即sharding）了。这种方案就复杂多了，我也没做过。你再根据你的业务情况考虑一下吧。<br><a id="more"></a></p>
-<p>2、Q：</p>
-<pre><code>数据库设计 类似微博中的内容和评论、点赞等需要分离出两个表吗？
-</code></pre><p>A：<br>应用需求类似微博这样，用户发布一条微博，数据分为两类<br>1、内容：内容、日期、与其用户发布的地理位置等等。这些数据基本没啥变动。应该叫冷数据<br>2、点赞、评论数等。这些数据频繁变动，应该叫热数据。</p>
-<p>我现在的疑问就是：针对这个场景，如何设计数据库？<br>需要分成两个表吗？一个表读比较多，一个表写比较多，这样分出来是不是有好处？</p>
-<p>冷热数据物理存储分开存储的思路是对的，冷热数据读写特性不同（冷数据的读写比例高于热数据），分开储存之后可以采用不同的cache策略，冷数据因为更新少可以直接同步一份至redis这类NOSQL服务，业务层直接从redis读取，减少对mysqldb的压力；热数据因更新较频繁，可以根据用户id（或者说uin）hash到多台写服务，并先写至写服务器的本地缓存中，再异步定时批量更新至mysql，减少对mysql的写压力。</p>
-<p><br><br><em>（转载自<a href="http://blog.csdn.net/u010098331/article/details/51446102）" target="_blank" rel="external">http://blog.csdn.net/u010098331/article/details/51446102）</a></em></p>
+        <p>（来自<a href="http://blog.csdn.net/u010098331/article/details/51446245）" target="_blank" rel="external">http://blog.csdn.net/u010098331/article/details/51446245）</a></p>
+<h2 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h2><p>目前主流的博客系统、CMS都会有一个TAG标签系统，不仅可以让内容链接的结构化增强，而且可以让文章根据Tag来区分。相比传统老式的Keyword模式，这种Tag模式可以单独的设计一个Map的映射表来增加系统的负载和查询的效率。<br><br></p>
+<h2 id="数据库设计方案1"><a href="#数据库设计方案1" class="headerlink" title="数据库设计方案1"></a>数据库设计方案1</h2><p>1.Tag表<br>2.文章表</p>
+<p>Tag表表结构：</p>
+<pre><code>tagid # tag标签的ID
+tagname #tag内容
+num #当前Tag的引用个数
+</code></pre><p>文章表结构：</p>
+<pre><code>ID #文章ID
+title #文章标题
+tags #tags列表，多个以,分割
+tagid #tags的ID 多个以,分割
+</code></pre><p>此种方式Tag标签主要内容保存在 文章表 中，对于Tag表的压力较小，只是添加的时候更新一下Tag的引用数量，但是查询的时候效率不足，不是好办法。<a id="more"></a></p>
+<p><br></p>
+<h2 id="数据库设计方案2"><a href="#数据库设计方案2" class="headerlink" title="数据库设计方案2"></a>数据库设计方案2</h2><p>第二种方案使用2个Tag表，其中一个保存Tag信息，另一个保存映射信息：<br>Tag表：</p>
+<pre><code>tagid # tag标签的ID
+tagname #tag内容
+num #当前Tag的引用个数
+</code></pre><p>Tagmap表：</p>
+<pre><code>tagid
+aid
+</code></pre><p>文章表：</p>
+<pre><code>ID #文章ID
+title #文章标题
+tags #tags列表，多个以,分割
+</code></pre><p>这种形式，每次发布内容和修改内容的时候 都去更新一下Tag表和 Tagmap表。<br>查询的时候需要从Tagmap表中查找响应的文章ID，然后使用文章ID去查询具体的文章信息，因为每次查询都是使用索引，所以效率较高。</p>
+<p><br></p>
+<h2 id="数据库设计方案3"><a href="#数据库设计方案3" class="headerlink" title="数据库设计方案3"></a>数据库设计方案3</h2><p>前两种方案都是使用纯粹的MySQL来设计的，第三种方案将使用NoSQL的魅力来设计。<br>基本结构同方案2，只是在Tag表和Tagmap表中使用mongo/redis这样的NoSQL数据库服务器，这样可以发挥NoSQL数据库强大的线性查询能力。<br>1） 第一种方式的表结构设计与方案2完全相同，只是数据库服务器换了。<br>2）其他的方案，当然是发挥NoSQL的线性能力来设计存储的Key了，尤其是使用Redis的时候，使用的Key的结构可以完美的提高查询效率。</p>
+<p><br><br>其他参考：<br><a href="http://www.cnblogs.com/adandelion/archive/2009/07/29/1533854.html" target="_blank" rel="external">http://www.cnblogs.com/adandelion/archive/2009/07/29/1533854.html</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/点赞-数据库设计/" data-id="cizfhioj2000hy8nzqcy5ozbt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/21/标签系统-数据库设计/" data-id="cizfhioj2000fy8nzxbvtwkvk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
@@ -143,19 +146,10 @@ A：建议增加点赞表, 字段列表:    用户id,    主题id,    点赞时�
     
 <nav id="article-nav">
   
-    <a href="/2017/02/13/关注互粉MySQL实现/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          关注互粉MySQL实现
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/02/13/App的开发阶段及需要的角色/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">App的开发阶段及需要的角色</div>
+      <div class="article-nav-title">Android Jsoup网页爬虫—&gt;程序猿面试指南App</div>
     </a>
   
 </nav>

@@ -72,6 +72,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-标签系统-数据库设计" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/21/标签系统-数据库设计/" class="article-date">
+  <time datetime="2017-02-21T11:59:16.000Z" itemprop="datePublished">2017-02-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（来自<a href="http://blog.csdn.net/u010098331/article/details/51446245）">http://blog.csdn.net/u010098331/article/details/51446245）</a></p>
+<h2 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h2><p>目前主流的博客系统、CMS都会有一个TAG标签系统，不仅可以让内容链接的结构化增强，而且可以让文章根据Tag来区分。相比传统老式的Keyword模式，这种Tag模式可以单独的设计一个Map的映射表来增加系统的负载和查询的效率。<br><br/></p>
+<h2 id="数据库设计方案1"><a href="#数据库设计方案1" class="headerlink" title="数据库设计方案1"></a>数据库设计方案1</h2><p>1.Tag表<br>2.文章表</p>
+<p>Tag表表结构：</p>
+<pre><code>tagid # tag标签的ID
+tagname #tag内容
+num #当前Tag的引用个数
+</code></pre><p>文章表结构：</p>
+<pre><code>ID #文章ID
+title #文章标题
+tags #tags列表，多个以,分割
+tagid #tags的ID 多个以,分割
+</code></pre><p>此种方式Tag标签主要内容保存在 文章表 中，对于Tag表的压力较小，只是添加的时候更新一下Tag的引用数量，但是查询的时候效率不足，不是好办法。
+        
+          <p class="article-more-link">
+            <a href="/2017/02/21/标签系统-数据库设计/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/21/标签系统-数据库设计/" data-id="cizfhioj2000fy8nzxbvtwkvk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android-Jsoup网页爬虫—-程序猿面试指南App" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" class="article-date">
@@ -115,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" data-id="ciz8dklxl0000r0nzss6dgi28" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" data-id="cizfhioi70000y8nzzy3wl7an" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android网络/">Android网络</a></li></ul>
@@ -169,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/14/App架构设计经验谈：接口的设计/" data-id="ciz8dklzs000rr0nzlh4cf02i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/14/App架构设计经验谈：接口的设计/" data-id="cizfhioks000uy8nz8sk9x8or" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/接口设计/">接口设计</a></li></ul>
@@ -226,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/关注互粉MySQL实现/" data-id="ciz8dklyh0008r0nzga0z0qoo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/13/关注互粉MySQL实现/" data-id="cizfhioj20008y8nz520gyxq9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
@@ -276,60 +331,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/点赞-数据库设计/" data-id="ciz8dklyh000dr0nz7f0bx8f1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/13/点赞-数据库设计/" data-id="cizfhioj2000hy8nzqcy5ozbt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-App的开发阶段及需要的角色" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/13/App的开发阶段及需要的角色/" class="article-date">
-  <time datetime="2017-02-13T12:05:47.000Z" itemprop="datePublished">2017-02-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/13/App的开发阶段及需要的角色/">App的开发阶段及需要的角色</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>注：本文转自<a href="http://blog.csdn.net/u010098331/article/details/51333248#t0">http://blog.csdn.net/u010098331/article/details/51333248#t0</a></em><br>个人转载说明：这篇文章所提及的流程都是比较正规的，也和团队规模有关，适合真正的产品开发。<br><br/></p>
-<p>开发app需要的角色：</p>
-<blockquote>
-<p>开发一款手机APP应用软件，需要多个流程、多种工作角色分工</p>
-</blockquote>
-<p>简单说明如下：</p>
-<p>1、开发流程包括：<br>（1）用户需求分析<br>（2）产品原型设计<br>（3）UI视觉设计<br>（4）数据库搭建<br>（5）服务端开发<br>（6）iOS客户端开发/Android客户端开发<br>（7）APP测试<br>（8）上传到应用商店（iOS提交到苹果的App Store，安卓的提交到国内各大安卓应用商店）。</p>
-<p>2、对应的工作职位包括：<br>（1）产品经理<br>（2）UI设计师<br>（3）数据库架构师<br>（4）服务端工程师<br>（5）iOS客户端工程师<br>（6）Android客户端工程师<br>（7）测试工程师<br>（8）运营人员<br>（9）推广人员。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/13/App的开发阶段及需要的角色/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/App的开发阶段及需要的角色/" data-id="ciz8dkly10003r0nzog51e7c2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目经验/">项目经验</a></li></ul>
 
     </footer>
   </div>
@@ -386,6 +391,10 @@
       <ul>
         
           <li>
+            <a href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/">Android Jsoup网页爬虫—&gt;程序猿面试指南App</a>
           </li>
         
@@ -399,10 +408,6 @@
         
           <li>
             <a href="/2017/02/13/点赞-数据库设计/">点赞 数据库设计</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/13/App的开发阶段及需要的角色/">App的开发阶段及需要的角色</a>
           </li>
         
       </ul>

@@ -72,6 +72,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-那些和日期息息相关的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/24/那些和日期息息相关的方法/" class="article-date">
+  <time datetime="2017-01-24T13:01:06.000Z" itemprop="datePublished">2017-01-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/24/那些和日期息息相关的方法/">那些和日期息息相关的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>在平时的开发中，我们经常会和日期和时间打交道，想必大家多少都使用到了和日期有关的工具类，最常见的比如日期格式转化等。以下我将会整理一些和日期息息相关的例子和通用方法。</p>
+</blockquote>
+<h3 id="1-今天？昨天？前天？"><a href="#1-今天？昨天？前天？" class="headerlink" title="1. 今天？昨天？前天？"></a>1. 今天？昨天？前天？</h3><p>例子：<br><img src="http://img.blog.csdn.net/20170124222524537?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片1"></p>
+<p>这里将一个普通的日期转化成较为友好的“今天”、“昨天”、“前天”，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">public static String FriendlyDate(Date compareDate) &#123;</div><div class="line">	Date nowDate = new Date();</div><div class="line">	int dayDiff = daysOfTwo(nowDate, compareDate);</div><div class="line">	if (dayDiff &lt;= 0) &#123;</div><div class="line">		return &quot;今天&quot;;</div><div class="line">	&#125; else if (dayDiff == 1) &#123;</div><div class="line">		return &quot;昨天&quot;;</div><div class="line">	&#125; else if (dayDiff == 2) &#123;</div><div class="line">		return &quot;前天&quot;;</div><div class="line">	&#125; else &#123;</div><div class="line">		return new SimpleDateFormat(&quot;M月d日 E&quot;).format(compareDate);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">public static int daysOfTwo(Date originalDate, Date compareDateDate) &#123;</div><div class="line">	Calendar aCalendar = Calendar.getInstance();</div><div class="line">	aCalendar.setTime(originalDate);</div><div class="line">	int originalDay = aCalendar.get(Calendar.DAY_OF_YEAR);</div><div class="line">	aCalendar.setTime(compareDateDate);</div><div class="line">	int compareDay = aCalendar.get(Calendar.DAY_OF_YEAR);</div><div class="line"></div><div class="line">	return originalDay - compareDay;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><br/></p>
+<h3 id="2-时间戳友好化"><a href="#2-时间戳友好化" class="headerlink" title="2. 时间戳友好化"></a>2. 时间戳友好化</h3><p>有时候我们是用时间戳来存储时间的，在Java中时间戳是一个占有13位数字的long型整数，比如1481687708985
+        
+          <p class="article-more-link">
+            <a href="/2017/01/24/那些和日期息息相关的方法/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/24/那些和日期息息相关的方法/" data-id="cizfhioji000jy8nz4ifdkaaq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android网络基础-天气预报demo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/05/11/Android网络基础-天气预报demo/" class="article-date">
@@ -103,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/11/Android网络基础-天气预报demo/" data-id="ciz8dkly10001r0nz2z09bmru" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/11/Android网络基础-天气预报demo/" data-id="cizfhioin0001y8nzq4nfha5r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/05/06/搭建博客的原因及愿景/" data-id="ciz8dklyh000br0nzf2dt1hr3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/05/06/搭建博客的原因及愿景/" data-id="cizfhioj2000dy8nzr28f4j3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -198,6 +246,10 @@
       <ul>
         
           <li>
+            <a href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
+          </li>
+        
+          <li>
             <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/">Android Jsoup网页爬虫—&gt;程序猿面试指南App</a>
           </li>
         
@@ -211,10 +263,6 @@
         
           <li>
             <a href="/2017/02/13/点赞-数据库设计/">点赞 数据库设计</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/13/App的开发阶段及需要的角色/">App的开发阶段及需要的角色</a>
           </li>
         
       </ul>
