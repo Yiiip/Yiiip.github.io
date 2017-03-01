@@ -72,6 +72,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-点赞-数据库设计" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/13/点赞-数据库设计/" class="article-date">
+  <time datetime="2017-02-13T12:25:44.000Z" itemprop="datePublished">2017-02-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/13/点赞-数据库设计/">点赞 数据库设计</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1、Q：</p>
+<pre><code>现在实现了点赞功能，
+主要涉及了两个表，
+一个保存被点的数量，另一个是某一个对哪些点了赞。
+
+现在的问题是每次点赞都会进行数据的读写操作（特别是写），并发的话会导致数据库压力太大，请问如何解决？谢谢。
+</code></pre><p>A：<br>建议增加点赞表, 字段列表:<br>    用户id,<br>    主题id,<br>    点赞时间,<br>    状态 0-已取消赞  1-有效赞。</p>
+<p>就像楼上所说的这样，这是经典的数据库设计中处理多对多关系的方式。这样的记录数会特别多，每一个用户赞过的每一条微博都会有一条记录，如果真的像新博微博业务量那么大的话，就要考虑做分库分表（即sharding）了。这种方案就复杂多了，我也没做过。你再根据你的业务情况考虑一下吧。<br>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/13/点赞-数据库设计/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/02/13/点赞-数据库设计/" data-id="cizqr6llq000s0cnzln2g6jxq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-App的开发阶段及需要的角色" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/13/App的开发阶段及需要的角色/" class="article-date">
@@ -110,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/App的开发阶段及需要的角色/" data-id="cizfhioin0003y8nzue44h5lf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/13/App的开发阶段及需要的角色/" data-id="cizqr6lg200000cnz5y7rzcwi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/项目经验/">项目经验</a></li></ul>
@@ -174,7 +224,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/03/SettingBar - Android自定义控件/" data-id="cizfhioin0005y8nzsxdel3xx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/03/SettingBar - Android自定义控件/" data-id="cizqr6lja000f0cnz6lddd7vd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android自定义控件/">Android自定义控件</a></li></ul>
@@ -225,7 +275,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/03/嵌套评论的数据库表设计（路径枚举）/" data-id="cizfhioj2000by8nz80dkkhu5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/03/嵌套评论的数据库表设计（路径枚举）/" data-id="cizqr6liu000b0cnz5v8xz5s4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
@@ -273,58 +323,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/01/在数据库中存储层级结构/" data-id="cizfhioj20009y8nzonaj478t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/01/在数据库中存储层级结构/" data-id="cizqr6lly000t0cnztq176tp0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-RESTful架构与接口设计" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/30/RESTful架构与接口设计/" class="article-date">
-  <time datetime="2017-01-30T09:05:00.000Z" itemprop="datePublished">2017-01-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/30/RESTful架构与接口设计/">RESTful架构与接口设计</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>Representational state transfer (REST) or RESTful Web services are one way of providing interoperability between computer systems on the Internet.</p>
-<p><p align="right">—— <a href="https://en.wikipedia.org/wiki/Representational_state_transfer" title="WiKi">WiKi</a></p>
-</blockquote>
-<p>　　RESTful架构，就是目前最流行的一种互联网软件架构。它结构清晰、易于理解、扩展方便，更具有人性化，已经被越来越多的我们熟知的网站所采用。<br/><br><strong>1. 什么是REST原则</strong><br>　　REST全称是Representational State Transfer，中文意思是表述性状态转移（表现层的状态转移）。 它首次出现在2000年Roy Fielding的博士论文中，Roy Fielding是HTTP规范的主要编写者之一。 他在论文中提到：“我这篇文章的写作目的，就是想在符合架构原理的前提下，理解和评估以网络为基础的应用软件的架构设计，得到一个功能强、性能好、适宜通信的架构。REST指的是一组架构约束条件和原则。” 如果一个架构符合REST的约束条件和原则，我们就称它为RESTful架构。</p>
-<p>　　REST本身并没有创造新的技术、组件或服务，而隐藏在RESTful背后的理念就是使用Web的现有特征和能力， 更好地使用现有Web标准中的一些准则和约束。虽然REST本身受Web技术的影响很深， 但是理论上REST架构风格并不是绑定在HTTP上，只不过目前HTTP是唯一与REST相关的实例。 所以我们这里描述的REST也是通过HTTP实现的REST。<br><br/><strong>2. 理解RESTful</strong><br>　　如果一个架构符合REST原则，就称它为RESTful架构。<br>　　要想理解Representational State Transfer这个词组到底是什么意思，它的每一个词都有些什么涵义。
-        
-          <p class="article-more-link">
-            <a href="/2017/01/30/RESTful架构与接口设计/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/01/30/RESTful架构与接口设计/" data-id="cizfhioin0004y8nzab8dfnzr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/接口设计/">接口设计</a></li></ul>
 
     </footer>
   </div>
@@ -368,7 +370,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
     </div>
   </div>
 
@@ -379,6 +381,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/">逻辑数据库设计-单纯的树(递归关系数据)</a>
+          </li>
         
           <li>
             <a href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
@@ -394,10 +400,6 @@
         
           <li>
             <a href="/2017/02/13/关注互粉MySQL实现/">关注互粉MySQL实现</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/13/点赞-数据库设计/">点赞 数据库设计</a>
           </li>
         
       </ul>

@@ -3,17 +3,49 @@
 <head>
   <meta charset="utf-8">
   
-  <title>北冥有鸟，其名为鹏 | Liu Yingpeng</title>
+  <title>逻辑数据库设计-单纯的树(递归关系数据) | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Android开发">
-<meta property="og:type" content="website">
-<meta property="og:title" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="（原文来自：http://www.cnblogs.com/kissdodog/p/3297894.html）
+相信有过开发经验的朋友都曾碰到过这样一个需求。假设你正在为一个新闻网站开发一个评论功能，读者可以评论原文甚至相互回复。
+这个需求并不简单，相互回复会导致无限多的分支，无限多的祖先-后代关系。这是一种典型的递归关系数据。
+对于这个问题，以下给出几个解决方案，各位客观可斟酌后选择。
+一、邻接表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逻辑数据库设计-单纯的树(递归关系数据)">
+<meta property="og:url" content="http://yoursite.com/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/index.html">
 <meta property="og:site_name" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
-<meta property="og:description" content="Android开发">
+<meta property="og:description" content="（原文来自：http://www.cnblogs.com/kissdodog/p/3297894.html）
+相信有过开发经验的朋友都曾碰到过这样一个需求。假设你正在为一个新闻网站开发一个评论功能，读者可以评论原文甚至相互回复。
+这个需求并不简单，相互回复会导致无限多的分支，无限多的祖先-后代关系。这是一种典型的递归关系数据。
+对于这个问题，以下给出几个解决方案，各位客观可斟酌后选择。
+一、邻接表">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/02235842-37fc0386f30641dd81e0e3f80f76ea4f.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04220606-1625c463b5bf4c678e61d528502d021e.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/03000412-8cc431756efa41a7aad1286bea609f4f.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04235144-2158b9e4c0a54df0888ef7c67022494b.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/05000459-d302b5d2f9b849f7aae9d9b6335aa302.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/03231826-3df90cf01b6d4aa59d7d6be56559af07.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/03231729-531b360fc08b4bb2a2f71977e481b1b7.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/03232041-e55a7eb649ce4b55840420b9b1d00cc3.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04011422-07af9d85473f4923bfa07b96e93b6138.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04012248-9aa7cf7245154ddaa209114185f8cf33.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04012528-093e67daccd24b58b489f58ec7d2c443.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04185906-1fb31e03469f4cbe8b02f857da15e687.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04224439-c9882b60a5b0487d880514dc0ae4ac7b.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04225328-6554d2ce4a894eb591a06ae709578925.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04225741-a887587c8e2c4b77a86927182f29f6f4.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04230249-566e91c020e3433f83cdaba7e809e399.jpg">
+<meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04231102-ad5c0dda49764e1c9386a308a36a0ad3.jpg">
+<meta property="og:image" content="http://img.blog.csdn.net/20170301171537106?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-03-01T09:21:44.341Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
-<meta name="twitter:description" content="Android开发">
+<meta name="twitter:title" content="逻辑数据库设计-单纯的树(递归关系数据)">
+<meta name="twitter:description" content="（原文来自：http://www.cnblogs.com/kissdodog/p/3297894.html）
+相信有过开发经验的朋友都曾碰到过这样一个需求。假设你正在为一个新闻网站开发一个评论功能，读者可以评论原文甚至相互回复。
+这个需求并不简单，相互回复会导致无限多的分支，无限多的祖先-后代关系。这是一种典型的递归关系数据。
+对于这个问题，以下给出几个解决方案，各位客观可斟酌后选择。
+一、邻接表">
+<meta name="twitter:image" content="http://images.cnitblog.com/blog/347600/201309/02235842-37fc0386f30641dd81e0e3f80f76ea4f.jpg">
   
     <link rel="alternate" href="/" title="北冥有鸟，其名为鹏 | Liu Yingpeng" type="application/atom+xml">
   
@@ -70,9 +102,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-逻辑数据库设计-单纯的树-递归关系数据" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-逻辑数据库设计-单纯的树-递归关系数据" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/" class="article-date">
   <time datetime="2017-03-01T09:20:13.000Z" itemprop="datePublished">2017-03-01</time>
@@ -85,8 +115,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/">逻辑数据库设计-单纯的树(递归关系数据)</a>
+    <h1 class="article-title" itemprop="name">
+      逻辑数据库设计-单纯的树(递归关系数据)
     </h1>
   
 
@@ -257,236 +287,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-标签系统-数据库设计" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/21/标签系统-数据库设计/" class="article-date">
-  <time datetime="2017-02-21T11:59:16.000Z" itemprop="datePublished">2017-02-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
-    </h1>
+    <a href="/2017/02/21/标签系统-数据库设计/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">标签系统 数据库设计</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>（来自<a href="http://blog.csdn.net/u010098331/article/details/51446245）">http://blog.csdn.net/u010098331/article/details/51446245）</a></p>
-<h2 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h2><p>目前主流的博客系统、CMS都会有一个TAG标签系统，不仅可以让内容链接的结构化增强，而且可以让文章根据Tag来区分。相比传统老式的Keyword模式，这种Tag模式可以单独的设计一个Map的映射表来增加系统的负载和查询的效率。<br><br/></p>
-<h2 id="数据库设计方案1"><a href="#数据库设计方案1" class="headerlink" title="数据库设计方案1"></a>数据库设计方案1</h2><p>1.Tag表<br>2.文章表</p>
-<p>Tag表表结构：</p>
-<pre><code>tagid # tag标签的ID
-tagname #tag内容
-num #当前Tag的引用个数
-</code></pre><p>文章表结构：</p>
-<pre><code>ID #文章ID
-title #文章标题
-tags #tags列表，多个以,分割
-tagid #tags的ID 多个以,分割
-</code></pre><p>此种方式Tag标签主要内容保存在 文章表 中，对于Tag表的压力较小，只是添加的时候更新一下Tag的引用数量，但是查询的时候效率不足，不是好办法。
-        
-          <p class="article-more-link">
-            <a href="/2017/02/21/标签系统-数据库设计/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/21/标签系统-数据库设计/" data-id="cizqr6lj2000d0cnz3kkaij42" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-    <article id="post-Android-Jsoup网页爬虫—-程序猿面试指南App" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" class="article-date">
-  <time datetime="2017-02-16T12:39:19.000Z" itemprop="datePublished">2017-02-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/">Android Jsoup网页爬虫—&gt;程序猿面试指南App</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>笔者今年9月份就要大四了，迟早要经历面试什么的，那么从现在起就要做好充足的准备，无意间发现了一些比较好的<a href="http://blog.csdn.net/derrantcm/article/details/46887821">面试题</a>博文，于是便想把里面的内容爬下来，以后阅读起来也很方便，顺便还能实践一下Jsoup网页爬虫。</p>
-<p>想法有了，数据资源有了，那么一个用于个人学习的<a href="https://github.com/Yiiip/ProgrammerInterviewGuide">“程序猿面试指南”</a>App就诞生了。</p>
-<p>有些人可能说这种爬博文没啥技术含量，其实道理理解了其他都好说。</p>
-<p>这里再推荐一篇文章《<a href="http://mp.weixin.qq.com/s?__biz=MzAxMTI4MTkwNQ==&amp;mid=2650822053&amp;idx=1&amp;sn=3600e1e040be990976fb7139a2d31151&amp;chksm=80b7813bb7c0082d0b551b9633adce1748a575ce4bf0e64a5317af4aed7b455ae8780aee508a&amp;mpshare=1&amp;scene=1&amp;srcid=0215RVe4avFXqxQIfbjo4jpw#rd">Android实战 Jsoup实现网络爬虫,糗事百科项目的起步</a>》供参考。</p>
-<h2 id="2-关于Jsoup"><a href="#2-关于Jsoup" class="headerlink" title="2. 关于Jsoup"></a>2. 关于Jsoup</h2><p><strong>简介：</strong></p>
-<p>“jsoup是一个Java库来处理实际的HTML。它提供了一个非常方便的API来提取和操纵数据,使用最好的DOM,CSS和jQuery-like方法”。说白了就是解析HTML用的。</p>
-<p><strong>AndroidStudio配置：</strong></p>
-<p>第一是在gradle中添加依赖：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;org.jsoup:jsoup:1.10.2&apos;</div></pre></td></tr></table></figure>
-<p>第二不要忘记添加网络权限：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</div></pre></td></tr></table></figure>
-<p><strong>基本用法：</strong></p>
-<p>（1）获取HTML<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" data-id="cizqr6li200080cnzam6bkq7x" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android网络/">Android网络</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-App架构设计经验谈：接口的设计" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/14/App架构设计经验谈：接口的设计/" class="article-date">
-  <time datetime="2017-02-14T13:34:29.000Z" itemprop="datePublished">2017-02-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/14/App架构设计经验谈：接口的设计/">App架构设计经验谈：接口的设计</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>App与服务器的通信接口如何设计得好，需要考虑的地方挺多的，在此根据我的一些经验做一些总结分享，旨在抛砖引玉。</p>
-<h2 id="1-安全机制的设计"><a href="#1-安全机制的设计" class="headerlink" title="1. 安全机制的设计"></a>1. 安全机制的设计</h2><p>现在，大部分App的接口都采用RESTful架构，RESTFul最重要的一个设计原则就是，客户端与服务器的交互在请求之间是无状态的，也就是说，当涉及到用户状态时，每次请求都要带上身份验证信息。实现上，大部分都采用token的认证方式，一般流程是：</p>
-<ol>
-<li>用户用密码登录成功后，服务器返回token给客户端；</li>
-<li>客户端将token保存在本地，发起后续的相关请求时，将token发回给服务器；</li>
-<li>服务器检查token的有效性，有效则返回数据，若无效，分两种情况：</li>
-</ol>
-<ul>
-<li>token错误，这时需要用户重新登录，获取正确的token</li>
-<li>token过期，这时客户端需要再发起一次认证请求，获取新的token</li>
-</ul>
-<p>然而，此种验证方式存在一个安全性问题：当登录接口被劫持时，黑客就获取到了用户密码和token，后续则可以对该用户做任何事情了。用户只有修改密码才能夺回控制权。<br>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/14/App架构设计经验谈：接口的设计/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/14/App架构设计经验谈：接口的设计/" data-id="cizqr6lgi00010cnzyfyqqjle" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/接口设计/">接口设计</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关注互粉MySQL实现" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/13/关注互粉MySQL实现/" class="article-date">
-  <time datetime="2017-02-13T14:35:50.000Z" itemprop="datePublished">2017-02-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/13/关注互粉MySQL实现/">关注互粉MySQL实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-关注关系产生的四种关系状态"><a href="#1-关注关系产生的四种关系状态" class="headerlink" title="1. 关注关系产生的四种关系状态"></a>1. 关注关系产生的四种关系状态</h2><ul>
-<li>关注</li>
-<li>粉丝</li>
-<li>双向关注(互粉)</li>
-<li>无关系<br>用词follower表示粉丝 – 追随者<br>用词following表示关注 – 追随</li>
-</ul>
-<h2 id="2-设计的结构必须能满足的功能"><a href="#2-设计的结构必须能满足的功能" class="headerlink" title="2. 设计的结构必须能满足的功能"></a>2. 设计的结构必须能满足的功能</h2><ul>
-<li>查询关注列表</li>
-<li>查询粉丝列表</li>
-<li>查询双向关注列表</li>
-<li>判断两个用户的关系</li>
-<li>查询带关系状态的任一列表</li>
-</ul>
-<h2 id="3-第一种方案"><a href="#3-第一种方案" class="headerlink" title="3. 第一种方案"></a>3. 第一种方案</h2><p>用一行纪录表示关注和粉丝，其中，字段u2的值表示粉丝，字段u1表示被关注者。</p>
-<p>Table: user(用户表)<br><img src="http://img.blog.csdn.net/20170213225042958?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="user"><br>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/13/关注互粉MySQL实现/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/关注互粉MySQL实现/" data-id="cizqr6lhq00050cnz2drj9968" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">
