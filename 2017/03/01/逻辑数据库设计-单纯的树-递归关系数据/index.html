@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04230249-566e91c020e3433f83cdaba7e809e399.jpg">
 <meta property="og:image" content="http://images.cnitblog.com/blog/347600/201309/04231102-ad5c0dda49764e1c9386a308a36a0ad3.jpg">
 <meta property="og:image" content="http://img.blog.csdn.net/20170301171537106?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2017-03-01T09:21:44.341Z">
+<meta property="og:updated_time" content="2017-03-01T09:23:23.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="逻辑数据库设计-单纯的树(递归关系数据)">
 <meta name="twitter:description" content="（原文来自：http://www.cnblogs.com/kissdodog/p/3297894.html）
@@ -132,7 +132,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE Comments(</div><div class="line">　　　　CommentId　　int　　PK,</div><div class="line">　　　　ParentId　　 int,　　　　--记录父节点</div><div class="line">　　　　ArticleId　　int,</div><div class="line">　　　　CommentBody nvarchar(500),</div><div class="line">　　　　FOREIGN KEY (ParentId)  REFERENCES Comments(CommentId) 　　--自连接，主键外键都在自己表内</div><div class="line">　　　　FOREIGN KEY (ArticleId) REFERENCES Articles(ArticleId)</div><div class="line">　　)</div></pre></td></tr></table></figure>
 <p>由于偷懒，所以采用了书本中的图了，里面Bugs就是我们的Articles：</p>
 <p><img src="http://images.cnitblog.com/blog/347600/201309/02235842-37fc0386f30641dd81e0e3f80f76ea4f.jpg" alt="pic"></p>
-<p>这种设计方式就叫做<strong>邻接表</strong>。这可能是存储分层结构数据中最普通的方案了。</p>
+<p>这种设计方式就叫做<strong>邻接表</strong>。这可能是存储分层结构数据中最普通的方案了。<a id="more"></a></p>
 <p>下面给出一些数据来显示一下评论表中的分层结构数据。示例表：</p>
 <p><img src="http://images.cnitblog.com/blog/347600/201309/04220606-1625c463b5bf4c678e61d528502d021e.jpg" alt="pic"></p>
 <p>图片说明存储结构：</p>
