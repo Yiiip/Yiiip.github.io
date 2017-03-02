@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android贝塞尔曲线菜鸟起步 | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、基本认识贝塞尔曲线（Bezier curve）是应用于二维图形程序的数学曲线。
+一阶贝塞尔曲线：
+是一条直线，只有起点和终点，实现方法：
+1canvas.drawLine(float startX, float startY, float stopX, float stopY, @NonNull Paint paint) ;
+二阶贝塞尔曲线：
+有起点和终点、一个控制点的曲线，实现方法：12pa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android贝塞尔曲线菜鸟起步">
+<meta property="og:url" content="http://yoursite.com/2017/03/02/Android贝塞尔曲线菜鸟起步/index.html">
+<meta property="og:site_name" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
+<meta property="og:description" content="一、基本认识贝塞尔曲线（Bezier curve）是应用于二维图形程序的数学曲线。
+一阶贝塞尔曲线：
+是一条直线，只有起点和终点，实现方法：
+1canvas.drawLine(float startX, float startY, float stopX, float stopY, @NonNull Paint paint) ;
+二阶贝塞尔曲线：
+有起点和终点、一个控制点的曲线，实现方法：12pa">
+<meta property="og:image" content="http://img.blog.csdn.net/20170302205004638?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-03-02T13:10:52.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android贝塞尔曲线菜鸟起步">
+<meta name="twitter:description" content="一、基本认识贝塞尔曲线（Bezier curve）是应用于二维图形程序的数学曲线。
+一阶贝塞尔曲线：
+是一条直线，只有起点和终点，实现方法：
+1canvas.drawLine(float startX, float startY, float stopX, float stopY, @NonNull Paint paint) ;
+二阶贝塞尔曲线：
+有起点和终点、一个控制点的曲线，实现方法：12pa">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170302205004638?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/" title="北冥有鸟，其名为鹏 | Liu Yingpeng" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">北冥有鸟，其名为鹏 | Liu Yingpeng</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Android开发笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/aboutme">个人简历</a>
+        
+          <a class="main-nav-link" href="http://blog.csdn.net/skipperkevin">CSDN博客</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android贝塞尔曲线菜鸟起步" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/" class="article-date">
+  <time datetime="2017-03-02T13:08:31.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android贝塞尔曲线菜鸟起步
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、基本认识"><a href="#一、基本认识" class="headerlink" title="一、基本认识"></a>一、基本认识</h2><p>贝塞尔曲线（Bezier curve）是应用于二维图形程序的数学曲线。</p>
+<p><strong>一阶贝塞尔曲线：</strong></p>
+<p>是一条直线，只有起点和终点，实现方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">canvas.drawLine(float startX, float startY, float stopX, float stopY, @NonNull Paint paint) ;</div></pre></td></tr></table></figure>
+<p><strong>二阶贝塞尔曲线：</strong></p>
+<p>有起点和终点、一个控制点的曲线，实现方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">path.moveTo（startX, startY); //移至起点</div><div class="line">path.quadTo(controlX, controlY, endX, endY); //二阶曲线，参数是控制点和终点坐标</div></pre></td></tr></table></figure></p>
+<p><strong>三阶贝塞尔曲线：</strong></p>
+<p>有起点和终点、两个控制点的曲线，实现方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">path.moveTo(startX, startY);</div><div class="line">path.cubicTo(controlX1, controlY1, controlX2, controlY2, endX, endY); //三阶曲线，参数是控制点1、控制点2和终点坐标</div></pre></td></tr></table></figure>
+<p>展示一张效果图：</p>
+<p><img src="http://img.blog.csdn.net/20170302205004638?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="效果图"></p>
+<p>以下我将会实现图中的效果。<a id="more"></a></p>
+<h2 id="二、二阶贝塞尔曲线View"><a href="#二、二阶贝塞尔曲线View" class="headerlink" title="二、二阶贝塞尔曲线View"></a>二、二阶贝塞尔曲线View</h2><p>自定义一个SecondBezierView继承自View。</p>
+<p>首先，在构造方法中，初始化我们的画笔和其他变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public SecondBezierView(Context context, AttributeSet attrs, int defStyleAttr) &#123;</div><div class="line">        super(context, attrs, defStyleAttr);</div><div class="line"></div><div class="line">        mLinePaint = new Paint();</div><div class="line">        mLinePaint.setAntiAlias(true);</div><div class="line">        mLinePaint.setDither(true);</div><div class="line">        mLinePaint.setColor(Color.parseColor(&quot;#454545&quot;));</div><div class="line"></div><div class="line">        mBezierPaint = new Paint();</div><div class="line">        mBezierPaint.setAntiAlias(true);</div><div class="line">        mBezierPaint.setDither(true);</div><div class="line">        mBezierPaint.setColor(Color.RED);</div><div class="line">        mBezierPaint.setStyle(Paint.Style.STROKE);</div><div class="line">        mBezierPaint.setStrokeWidth(3);</div><div class="line"></div><div class="line">        mBezierPath = new Path();</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>然后，在onMeasure方法中明确我们贝塞尔曲线的起始点坐标、终点坐标和控制点坐标，这里让它处在居中的位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) &#123;</div><div class="line">    super.onMeasure(widthMeasureSpec, heightMeasureSpec);</div><div class="line"></div><div class="line">    mStartX = 50;</div><div class="line">    mStartY = getMeasuredHeight() / 2;</div><div class="line">    mEndX = getMeasuredWidth() - 50;</div><div class="line">    mEndY = getMeasuredHeight() / 2;</div><div class="line">    mControlX = (mStartX + mEndX) / 2;</div><div class="line">    mControlY = (mStartY + mEndY) / 2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来，就该在onDraw方法中绘制我们的曲线了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void onDraw(Canvas canvas) &#123;</div><div class="line">    super.onDraw(canvas);</div><div class="line"></div><div class="line">    canvas.drawCircle(mStartX, mStartY, 5, mLinePaint);</div><div class="line">    canvas.drawText(&quot;起点&quot;, mStartX - 10, mStartY - 10, mLinePaint);</div><div class="line">    canvas.drawCircle(mEndX, mEndY, 5, mLinePaint);</div><div class="line">    canvas.drawText(&quot;终点&quot;, mEndX - 10, mEndY - 10, mLinePaint);</div><div class="line">    canvas.drawCircle(mControlX, mControlY, 5, mLinePaint);</div><div class="line">    canvas.drawText(&quot;控制点&quot;, mControlX - 10, mControlY -10 , mLinePaint);</div><div class="line">    canvas.drawLine(mStartX, mStartY, mControlX, mControlY, mLinePaint);</div><div class="line">    canvas.drawLine(mEndX, mEndY, mControlX, mControlY, mLinePaint);</div><div class="line"></div><div class="line">    mBezierPath.reset(); //path重置，去除掉重复绘制时残留下的线条</div><div class="line">    mBezierPath.moveTo(mStartX, mStartY); //移至起点</div><div class="line">    mBezierPath.quadTo(mControlX, mControlY, mEndX, mEndY); //二阶贝塞尔曲线，参数是控制点和终点坐标</div><div class="line">    canvas.drawPath(mBezierPath, mBezierPaint);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，重写onTouchEvent，让控制点随着我们手指的移动而移动，并在松开手指时（ACTION_UP），让曲线以动画的形式重置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean onTouchEvent(MotionEvent event) &#123;</div><div class="line"></div><div class="line">    switch (event.getAction()) &#123;</div><div class="line"></div><div class="line">        case MotionEvent.ACTION_MOVE:</div><div class="line">        case MotionEvent.ACTION_DOWN:</div><div class="line">            mControlX = event.getX();</div><div class="line">            mControlY = event.getY();</div><div class="line">            invalidate();</div><div class="line">            break;</div><div class="line"></div><div class="line">        case MotionEvent.ACTION_UP:</div><div class="line">            ValueAnimator animX = ValueAnimator.ofFloat(mControlX, (mStartX + mEndX) / 2);</div><div class="line">            animX.setDuration(400);</div><div class="line">            animX.setInterpolator(new OvershootInterpolator());</div><div class="line">            animX.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">                @Override</div><div class="line">                public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">                    mControlX = (float) animation.getAnimatedValue();</div><div class="line">                    invalidate();</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">            animX.start();</div><div class="line"></div><div class="line">            ValueAnimator animY = ValueAnimator.ofFloat(mControlY, (mStartY + mEndY) / 2);</div><div class="line">            animY.setDuration(400);</div><div class="line">            animY.setInterpolator(new OvershootInterpolator());</div><div class="line">            animY.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() &#123;</div><div class="line">                @Override</div><div class="line">                public void onAnimationUpdate(ValueAnimator animation) &#123;</div><div class="line">                    mControlY = (float) animation.getAnimatedValue();</div><div class="line">                    invalidate();</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">            animY.start();</div><div class="line">            break;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="三、三阶贝塞尔曲线View"><a href="#三、三阶贝塞尔曲线View" class="headerlink" title="三、三阶贝塞尔曲线View"></a>三、三阶贝塞尔曲线View</h2><p>具体实现和二阶贝塞尔曲线相似，只不过这里有两个控制点。</p>
+<p>在绘制的时候，需要调用三阶的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mBezierPath.reset();</div><div class="line">mBezierPath.moveTo(mStartX, mStartY);</div><div class="line">mBezierPath.cubicTo(mControlX1, mControlY1, mControlX2, mControlY2, mEndX, mEndY); //三阶贝塞尔曲线，参数是控制点1、控制点2和终点坐标</div><div class="line">canvas.drawPath(mBezierPath, mBezierPaint);</div></pre></td></tr></table></figure>
+<p>而对于控制点的操纵，这里用到了多点触控：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean onTouchEvent(MotionEvent event) &#123;</div><div class="line">    switch (event.getAction() &amp; MotionEvent.ACTION_MASK) &#123; //多点触控</div><div class="line">        case MotionEvent.ACTION_POINTER_DOWN:</div><div class="line">            mIsSecondPoint = true;</div><div class="line">            break;</div><div class="line">        case MotionEvent.ACTION_POINTER_UP:</div><div class="line">            mIsSecondPoint = false;</div><div class="line">            break;</div><div class="line"></div><div class="line">        case MotionEvent.ACTION_MOVE:</div><div class="line">        case MotionEvent.ACTION_DOWN:</div><div class="line">            mControlX1 = event.getX(0);</div><div class="line">            mControlY1 = event.getY(0);</div><div class="line">            if (mIsSecondPoint) &#123;</div><div class="line">                mControlX2 = event.getX(1);</div><div class="line">                mControlY2 = event.getY(1);</div><div class="line">            &#125;</div><div class="line">            invalidate();</div><div class="line">            break;</div><div class="line"></div><div class="line">	......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体请参见我的代码：<a href="https://github.com/Yiiip/Bezier" target="_blank" rel="external">https://github.com/Yiiip/Bezier</a></p>
+<p>在实际的运用中，贝塞尔曲线可以让你的应用或者控件拥有非常漂亮的特效，和动画结合效果会非常理想。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/02/Android贝塞尔曲线菜鸟起步/" data-id="cizset96j0000d4nz2t43adk0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android自定义控件/">Android自定义控件</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">逻辑数据库设计-单纯的树(递归关系数据)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android网络/">Android网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android自定义控件/">Android自定义控件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口设计/">接口设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库设计/">数据库设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目经验/">项目经验</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android网络/" style="font-size: 10px;">Android网络</a> <a href="/tags/Android自定义控件/" style="font-size: 15px;">Android自定义控件</a> <a href="/tags/接口设计/" style="font-size: 15px;">接口设计</a> <a href="/tags/数据库设计/" style="font-size: 20px;">数据库设计</a> <a href="/tags/项目经验/" style="font-size: 10px;">项目经验</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/">Android贝塞尔曲线菜鸟起步</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/">逻辑数据库设计-单纯的树(递归关系数据)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/">Android Jsoup网页爬虫—&gt;程序猿面试指南App</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/14/App架构设计经验谈：接口的设计/">App架构设计经验谈：接口的设计</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liu Yingpeng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">个人简历</a>
+  
+    <a href="http://blog.csdn.net/skipperkevin" class="mobile-nav-link">CSDN博客</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

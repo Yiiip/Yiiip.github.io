@@ -72,6 +72,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android贝塞尔曲线菜鸟起步" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/" class="article-date">
+  <time datetime="2017-03-02T13:08:31.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/02/Android贝塞尔曲线菜鸟起步/">Android贝塞尔曲线菜鸟起步</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、基本认识"><a href="#一、基本认识" class="headerlink" title="一、基本认识"></a>一、基本认识</h2><p>贝塞尔曲线（Bezier curve）是应用于二维图形程序的数学曲线。</p>
+<p><strong>一阶贝塞尔曲线：</strong></p>
+<p>是一条直线，只有起点和终点，实现方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">canvas.drawLine(float startX, float startY, float stopX, float stopY, @NonNull Paint paint) ;</div></pre></td></tr></table></figure>
+<p><strong>二阶贝塞尔曲线：</strong></p>
+<p>有起点和终点、一个控制点的曲线，实现方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">path.moveTo（startX, startY); //移至起点</div><div class="line">path.quadTo(controlX, controlY, endX, endY); //二阶曲线，参数是控制点和终点坐标</div></pre></td></tr></table></figure></p>
+<p><strong>三阶贝塞尔曲线：</strong></p>
+<p>有起点和终点、两个控制点的曲线，实现方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">path.moveTo(startX, startY);</div><div class="line">path.cubicTo(controlX1, controlY1, controlX2, controlY2, endX, endY); //三阶曲线，参数是控制点1、控制点2和终点坐标</div></pre></td></tr></table></figure>
+<p>展示一张效果图：</p>
+<p><img src="http://img.blog.csdn.net/20170302205004638?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="效果图"></p>
+<p>以下我将会实现图中的效果。
+        
+          <p class="article-more-link">
+            <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/02/Android贝塞尔曲线菜鸟起步/" data-id="cizset96j0000d4nz2t43adk0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android自定义控件/">Android自定义控件</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-逻辑数据库设计-单纯的树-递归关系数据" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/" class="article-date">
@@ -111,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/" data-id="cizqr6ljm000h0cnzgyte3nqq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/" data-id="cizset97q000kd4nz9z9brgsa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
@@ -166,7 +220,7 @@ tagid #tags的ID 多个以,分割
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/21/标签系统-数据库设计/" data-id="cizqr6lj2000d0cnz3kkaij42" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/21/标签系统-数据库设计/" data-id="cizset97s000md4nzqebzkrj7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
@@ -221,7 +275,7 @@ tagid #tags的ID 多个以,分割
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" data-id="cizqr6li200080cnzam6bkq7x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/" data-id="cizset96v0003d4nzpcmdqjsg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android网络/">Android网络</a></li></ul>
@@ -275,67 +329,10 @@ tagid #tags的ID 多个以,分割
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/14/App架构设计经验谈：接口的设计/" data-id="cizqr6lgi00010cnzyfyqqjle" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/02/14/App架构设计经验谈：接口的设计/" data-id="cizset96x0004d4nzgmshry6h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/接口设计/">接口设计</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-关注互粉MySQL实现" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/13/关注互粉MySQL实现/" class="article-date">
-  <time datetime="2017-02-13T14:35:50.000Z" itemprop="datePublished">2017-02-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/13/关注互粉MySQL实现/">关注互粉MySQL实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-关注关系产生的四种关系状态"><a href="#1-关注关系产生的四种关系状态" class="headerlink" title="1. 关注关系产生的四种关系状态"></a>1. 关注关系产生的四种关系状态</h2><ul>
-<li>关注</li>
-<li>粉丝</li>
-<li>双向关注(互粉)</li>
-<li>无关系<br>用词follower表示粉丝 – 追随者<br>用词following表示关注 – 追随</li>
-</ul>
-<h2 id="2-设计的结构必须能满足的功能"><a href="#2-设计的结构必须能满足的功能" class="headerlink" title="2. 设计的结构必须能满足的功能"></a>2. 设计的结构必须能满足的功能</h2><ul>
-<li>查询关注列表</li>
-<li>查询粉丝列表</li>
-<li>查询双向关注列表</li>
-<li>判断两个用户的关系</li>
-<li>查询带关系状态的任一列表</li>
-</ul>
-<h2 id="3-第一种方案"><a href="#3-第一种方案" class="headerlink" title="3. 第一种方案"></a>3. 第一种方案</h2><p>用一行纪录表示关注和粉丝，其中，字段u2的值表示粉丝，字段u1表示被关注者。</p>
-<p>Table: user(用户表)<br><img src="http://img.blog.csdn.net/20170213225042958?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="user"><br>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/13/关注互粉MySQL实现/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/02/13/关注互粉MySQL实现/" data-id="cizqr6lhq00050cnz2drj9968" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
 
     </footer>
   </div>
@@ -370,7 +367,7 @@ tagid #tags的ID 多个以,分割
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android网络/" style="font-size: 10px;">Android网络</a> <a href="/tags/Android自定义控件/" style="font-size: 10px;">Android自定义控件</a> <a href="/tags/接口设计/" style="font-size: 15px;">接口设计</a> <a href="/tags/数据库设计/" style="font-size: 20px;">数据库设计</a> <a href="/tags/项目经验/" style="font-size: 10px;">项目经验</a>
+      <a href="/tags/Android网络/" style="font-size: 10px;">Android网络</a> <a href="/tags/Android自定义控件/" style="font-size: 15px;">Android自定义控件</a> <a href="/tags/接口设计/" style="font-size: 15px;">接口设计</a> <a href="/tags/数据库设计/" style="font-size: 20px;">数据库设计</a> <a href="/tags/项目经验/" style="font-size: 10px;">项目经验</a>
     </div>
   </div>
 
@@ -392,6 +389,10 @@ tagid #tags的ID 多个以,分割
       <ul>
         
           <li>
+            <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/">Android贝塞尔曲线菜鸟起步</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/">逻辑数据库设计-单纯的树(递归关系数据)</a>
           </li>
         
@@ -405,10 +406,6 @@ tagid #tags的ID 多个以,分割
         
           <li>
             <a href="/2017/02/14/App架构设计经验谈：接口的设计/">App架构设计经验谈：接口的设计</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/13/关注互粉MySQL实现/">关注互粉MySQL实现</a>
           </li>
         
       </ul>
