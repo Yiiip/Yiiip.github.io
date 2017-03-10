@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>网站评论功能数据库设计和开发 | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="（原文来自：http://blog.csdn.net/u010098331/article/details/51447144）
+本文主要分享在设计评论模块中的一些心得，希望对读者有些许帮助。
+需求分析现阶段评论做的最好的我想应该是网易新闻（app）里面的评论模块了，其“盖楼”的方式让人印象深刻，评论已经成为该app的核心功能之一了。市面上大部分app的评论模块设计的还是相对简单的，这是可以理解的，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网站评论功能数据库设计和开发">
+<meta property="og:url" content="http://yoursite.com/2017/03/10/网站评论功能数据库设计和开发/index.html">
+<meta property="og:site_name" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
+<meta property="og:description" content="（原文来自：http://blog.csdn.net/u010098331/article/details/51447144）
+本文主要分享在设计评论模块中的一些心得，希望对读者有些许帮助。
+需求分析现阶段评论做的最好的我想应该是网易新闻（app）里面的评论模块了，其“盖楼”的方式让人印象深刻，评论已经成为该app的核心功能之一了。市面上大部分app的评论模块设计的还是相对简单的，这是可以理解的，">
+<meta property="og:image" content="http://img.kuqin.com/upimg/allimg/160113/1J641G95-0.jpg?imageView/2/w/480/h/640%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=">
+<meta property="og:image" content="http://img.kuqin.com/upimg/allimg/160113/1J6415144-1.jpg?imageView/2/w/500/h/800%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=">
+<meta property="og:image" content="http://img.kuqin.com/upimg/allimg/160113/1J6413964-2.jpg?imageView/2/w/400/h/600%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310222148696?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310222258785?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310222356120?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.kuqin.com/upimg/allimg/160113/1J64121D-3.jpg?imageView/2/w/300/h/600%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310222556130?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170310222628608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-03-10T14:31:31.591Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网站评论功能数据库设计和开发">
+<meta name="twitter:description" content="（原文来自：http://blog.csdn.net/u010098331/article/details/51447144）
+本文主要分享在设计评论模块中的一些心得，希望对读者有些许帮助。
+需求分析现阶段评论做的最好的我想应该是网易新闻（app）里面的评论模块了，其“盖楼”的方式让人印象深刻，评论已经成为该app的核心功能之一了。市面上大部分app的评论模块设计的还是相对简单的，这是可以理解的，">
+<meta name="twitter:image" content="http://img.kuqin.com/upimg/allimg/160113/1J641G95-0.jpg?imageView/2/w/480/h/640%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=">
+  
+    <link rel="alternate" href="/" title="北冥有鸟，其名为鹏 | Liu Yingpeng" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">北冥有鸟，其名为鹏 | Liu Yingpeng</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Android开发笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/aboutme">个人简历</a>
+        
+          <a class="main-nav-link" href="http://blog.csdn.net/skipperkevin">CSDN博客</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-网站评论功能数据库设计和开发" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/10/网站评论功能数据库设计和开发/" class="article-date">
+  <time datetime="2017-03-10T14:29:48.000Z" itemprop="datePublished">2017-03-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      网站评论功能数据库设计和开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（原文来自：<a href="http://blog.csdn.net/u010098331/article/details/51447144）" target="_blank" rel="external">http://blog.csdn.net/u010098331/article/details/51447144）</a></p>
+<p>本文主要分享在设计评论模块中的一些心得，希望对读者有些许帮助。</p>
+<h2 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h2><p>现阶段评论做的最好的我想应该是网易新闻（app）里面的评论模块了，其“盖楼”的方式让人印象深刻，评论已经成为该app的核心功能之一了。市面上大部分app的评论模块设计的还是相对简单的，这是可以理解的，因为评论模块不是这些app的核心功能之一。</p>
+<p>在设计评论模块前可以和pd或者boss沟通，我们的评论功能是核心功能之一吗？实际上，90%的app采用简单的评论设计就可以了，</p>
+<p>也就是采用一问一答，类似于如下的设计。</p>
+<p><img src="http://img.kuqin.com/upimg/allimg/160113/1J641G95-0.jpg?imageView/2/w/480/h/640%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=" alt="pic"></p>
+<p>“一问一答”这种设计十分简单、直接，也满足了用户评论、回复的基本要求，对于没有大量用户评论或者评论不是核心功能的app来说就够用了。</p>
+<p>暂且把这种场景称之为 <strong>“场景A”</strong>。<a id="more"></a></p>
+<p>如果你是新闻类或者咨询类的app，有着大量的用户评论，那么设计“盖楼”的效果还是可取的，这样能帮助用户找到该条评论或者回复的上下文情景。但是根据“盖楼”的显示效果不同，设计上也是有很大的差别的。如果是以评论为主的显示方式，类似于下面的显示方式。</p>
+<p><img src="http://img.kuqin.com/upimg/allimg/160113/1J6415144-1.jpg?imageView/2/w/500/h/800%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=" alt="pic"></p>
+<p>评论为主这里可以把评论分为“评论”和“回复”，所有的回复均挂在评论下面，类似于树状结构。把这种场景称之为 <strong>“场景B”</strong>。</p>
+<p>最后就是类似于网易新闻的评论设计了，贴一张截图：</p>
+<p><img src="http://img.kuqin.com/upimg/allimg/160113/1J6413964-2.jpg?imageView/2/w/400/h/600%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=" alt="pic"></p>
+<p>同级显示这种场景下设计最为复杂，因为回复和评论是同等级的，回复还可以引用完整的回复路径，就是可以溯源到最开始的评论上。这种场景我将至称为 <strong>“场景C”</strong>。</p>
+<p>MySQL数据库设计如下：</p>
+<h2 id="场景A"><a href="#场景A" class="headerlink" title="场景A"></a>场景A</h2><p>这种场景下一般评论数量较少，评论不为活跃，可以把不区分评论和回复，而统一看成评论。区别在于有的评论是直接评论主题(每个评论都挂在某个主题下，如文章、帖子等)，而有些评论是@其他用户的，为了能cover这两张场景，使用一张表就可以达到效果，</p>
+<p>评论表 如下设计：</p>
+<p><img src="http://img.blog.csdn.net/20170310222148696?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic"></p>
+<p>为了能复用评论模块，我们引入一个topic_type字段来区分主题的类别。</p>
+<p>from_uid表示评论人的id，通过该id我们可以检索到评论人的相关信息。</p>
+<p>to_uid是评论目标人的id，如果没有目标人，则该字段为空。</p>
+<p>出于性能的考虑，往往我们会冗余评人的相关信息到评论表中，比如评论人的nick、头像等，目标用户也是如此。这样一来我们就只用查询单表就可以达到显示的效果。</p>
+<p>有时，目标用户有多个，那么可以将to_uid字段修改为to_uids，保存时用分隔符来分割用户id，而目标用户的信息再去查询缓存或者数据库。也可以简单的将多个目标用户的信息一起存成json格式，可以应付简单的展现需求。</p>
+<h2 id="场景B"><a href="#场景B" class="headerlink" title="场景B"></a>场景B</h2><p>在以评论为主的树形显示的情况下，数据库的设计十分灵活，可以使用单表，添加一个parent_id字段来指向父评论。如果数据库本身支持嵌套查询，那么还是比较方便的，SqlServer、Oracle都支持，但是mysql不支持，那就只能通过存储过程来实现。在互联网应用中，能不使用触发器｀存储过程`的话，尽量不要去使用，因为其对性能有影响。</p>
+<p>我们还可以将评论拆分为评论表和回复表，评论挂在各种主题下面，而回复都挂在评论下面。</p>
+<p>评论表 的设计如下：</p>
+<p><img src="http://img.blog.csdn.net/20170310222258785?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic"></p>
+<p>回复表 的设计如下：</p>
+<p><img src="http://img.blog.csdn.net/20170310222356120?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic"></p>
+<p>由于我们拆分了评论和回复，那么评论表就不再需要目标用户字段了，因为评论均是用户对主题的评论，评论表的设计更佳简洁了。</p>
+<p>回复表我添加了一个comment_id字段来表示该回复挂在的根评论id，这样设计也是出于性能方面的考虑，我们可以直接通过评论id一次性的捞出该评论下的所有回复，然后通过程序来编排回复的显示结构。通过适当的冗余来提高性能也是常用的优化手段之一。这里给出一段我通过来评论id来查找并组织所有回复的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">public List&lt;ReplyDTO&gt; getReplyListByRid(Long rid) &#123;</div><div class="line">List&lt;ReplyDO&gt; replyDOList = replyDAO.queryReplyByCid(rid);</div><div class="line">        if (replyDOList == null || replyDOList.size() == 0) &#123;</div><div class="line">            return new ArrayList&lt;&gt;();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        List&lt;ReplyDTO&gt; replyDTOList = new ArrayList&lt;&gt;();</div><div class="line">        List&lt;ReplyDTO&gt; parentList = new ArrayList&lt;&gt;();</div><div class="line">        for (ReplyDO replyDO : replyDOList) &#123;</div><div class="line">            ReplyDTO replyDTO = convertReplyToDTO(replyDO);</div><div class="line">            if (replyDTO.getReplyType() == ReplyType.COMMENT) &#123;</div><div class="line">                replyDTOList.add(replyDTO);</div><div class="line">                parentList.add(replyDTO);</div><div class="line">            &#125; else &#123;</div><div class="line">                boolean foundParent = false;</div><div class="line">                if (replyDTOList.size() &gt; 0) &#123;</div><div class="line">                    for (ReplyDTO parent : parentList) &#123;</div><div class="line">                        if (parent.getId().equals(replyDTO.getReplyId())) &#123;</div><div class="line">                            if (parent.getNext() == null) &#123;</div><div class="line">                                parent.setNext(new ArrayList&lt;ReplyDTO&gt;());</div><div class="line">                            &#125;</div><div class="line">                            parent.getNext().add(replyDTO);</div><div class="line">                            parentList.add(replyDTO);</div><div class="line">                            foundParent = true;</div><div class="line">                            break;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                if (!foundParent) &#123;</div><div class="line">                    throw new RuntimeException(&quot;sort reply error,should not go here.&quot;);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return replyDTOList;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>reply_type表示回复的类型，因为回复可以是针对评论的回复(comment)，也可以是针对回复的回复(reply)， 通过这个字段来区分两种情景。</p>
+<p>reply_id表示回复目标的id，如果reply_type是comment的话，那么reply_id＝commit_id，如果reply_type是reply的话，这表示这条回复的父回复。</p>
+<p>在数据结构的设计上，我在replyDTO中设计了一个List<replydto> next属性，这样在形成了一个树形的结构，类似如下树形结构：</replydto></p>
+<p><img src="http://img.kuqin.com/upimg/allimg/160113/1J64121D-3.jpg?imageView/2/w/300/h/600%7Cwatermark/2/text/aHR0cDovL21pY2hhZWwtai54eXo=" alt="pic"></p>
+<p>客户端可以直接根据该结构来进行树形结构的显示。</p>
+<h2 id="场景C"><a href="#场景C" class="headerlink" title="场景C"></a>场景C</h2><p>要达到网易新闻中评论的效果我还没有特别好的建议。这种场景中评论和回复是同级显示的，回复不在显示结构上不用挂在一个评论下面。双表的设计在这里就不太合适了，因为涉及到评论和回复的混排，使用双表则会导致查询的逻辑过于复杂。所以建议还是采用单表的设计，不区分评论和回复会简化应用层的逻辑。我们统一都看成评论，而有些评论是可以引用其他评论的。本人推荐采用闭包表的设计，例如：</p>
+<p>comment表设计：</p>
+<p><img src="http://img.blog.csdn.net/20170310222556130?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic"></p>
+<p>parent_children表：</p>
+<p><img src="http://img.blog.csdn.net/20170310222628608?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="pic"></p>
+<p>comment表保存所有评论内容，而parent_children表则记录评论表中各个评论的父子关系。</p>
+<p>查询时往往会按照时间排序，我们可以直接按id或者创建时间降序排列查询comment表即可。如果用户想查询一条评论的完整引用，则可以通过parent_children来找到对应的路径。向上查找到评论只需要可执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select parent_id from parent_children where child_id=$&#123;id&#125; and parent_id != $&#123;id&#125;</div></pre></td></tr></table></figure>
+<p>向下查找所有的子孙评论可执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select child_id from parent_children where parent_id = $&#123;id&#125; and parent_id != $&#123;id&#125;</div></pre></td></tr></table></figure>
+<p>闭包表在查询时非常方便，但是插入的性能稍差，因为除了插入评论表以外，还需要把该条评论所有的父子关系插入到父子关系表中。插入性能会随着评论层级的加深而线性下降。</p>
+<h2 id="海量数据优化"><a href="#海量数据优化" class="headerlink" title="海量数据优化"></a>海量数据优化</h2><p>如果你的系统每天都会有成千上万条评论，那么单表的设计肯定是不行，优化的方式也有很多：</p>
+<p>分库分表。分库分表是最为常用也最有效的优化方式，建议按照主题来分库分表。这样同一个主题下面的评论就会落到同一张表里，避免了跨表查询。</p>
+<p>适当的数据冗余。如果你需要显示评论人的相关信息，那么在插入评论时就把这些信息写入评论表中，避免多次查询。实际上，如果是纪录数据，都可以冗余对应的数据信息，因为它们的数据的实时行和一致性要求并不高，用户不会因为评论中的头像没更新而撕了你，哈哈。</p>
+<p>附加幂等数据只允许单项操作。如果pd要求你能给评论点赞，那么你可以告诉他只能点赞，不能取消。因为从幂等性的要求来说，每个赞都是一条记录。评论的赞数如果都从点赞表中统计得出，那么性能开销会十分巨大，而且点赞如此轻量级的一个操作一定会加剧点赞表的竞争操作。所以建议直接在评论表中添加一个like_count的计数器，该字段只增不减。热门评论加缓存。类似于网易新闻的热门评论，读取频度非常高，可以专门开接口给客户端，同时该接口做缓存。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/10/网站评论功能数据库设计和开发/" data-id="cj03x7ols000hdsnznzdx444a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库设计/">数据库设计</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android贝塞尔曲线菜鸟起步</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android网络/">Android网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android自定义控件/">Android自定义控件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口设计/">接口设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库设计/">数据库设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目经验/">项目经验</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android网络/" style="font-size: 10px;">Android网络</a> <a href="/tags/Android自定义控件/" style="font-size: 15px;">Android自定义控件</a> <a href="/tags/接口设计/" style="font-size: 15px;">接口设计</a> <a href="/tags/数据库设计/" style="font-size: 20px;">数据库设计</a> <a href="/tags/项目经验/" style="font-size: 10px;">项目经验</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/10/网站评论功能数据库设计和开发/">网站评论功能数据库设计和开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/">Android贝塞尔曲线菜鸟起步</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/">逻辑数据库设计-单纯的树(递归关系数据)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/16/Android-Jsoup网页爬虫—-程序猿面试指南App/">Android Jsoup网页爬虫—&gt;程序猿面试指南App</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liu Yingpeng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">个人简历</a>
+  
+    <a href="http://blog.csdn.net/skipperkevin" class="mobile-nav-link">CSDN博客</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
