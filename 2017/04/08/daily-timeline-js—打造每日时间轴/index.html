@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>daily-timeline.js——打造每日时间轴 | 北冥有鸟，其名为鹏 | Liu Yingpeng</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近因为需要在做会议室预约系统，其中需要用到一个显示当天预约情况的时间轴，去网上找了一下，发现只有和微博类似的历史时间轴，于是便自己动手做了一个当日时间轴控件（daily-timeline.js），实际使用效果如下：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="daily-timeline.js——打造每日时间轴">
+<meta property="og:url" content="http://yoursite.com/2017/04/08/daily-timeline-js—打造每日时间轴/index.html">
+<meta property="og:site_name" content="北冥有鸟，其名为鹏 | Liu Yingpeng">
+<meta property="og:description" content="最近因为需要在做会议室预约系统，其中需要用到一个显示当天预约情况的时间轴，去网上找了一下，发现只有和微博类似的历史时间轴，于是便自己动手做了一个当日时间轴控件（daily-timeline.js），实际使用效果如下：">
+<meta property="og:image" content="http://img.blog.csdn.net/20170408110538448?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170408121135933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170408121911639?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-04-08T04:45:41.993Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="daily-timeline.js——打造每日时间轴">
+<meta name="twitter:description" content="最近因为需要在做会议室预约系统，其中需要用到一个显示当天预约情况的时间轴，去网上找了一下，发现只有和微博类似的历史时间轴，于是便自己动手做了一个当日时间轴控件（daily-timeline.js），实际使用效果如下：">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170408110538448?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/" title="北冥有鸟，其名为鹏 | Liu Yingpeng" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">北冥有鸟，其名为鹏 | Liu Yingpeng</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">移动互联网开发笔记</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/aboutme">个人简历</a>
+        
+          <a class="main-nav-link" href="http://blog.csdn.net/skipperkevin">CSDN博客</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-daily-timeline-js—打造每日时间轴" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/08/daily-timeline-js—打造每日时间轴/" class="article-date">
+  <time datetime="2017-04-08T04:43:52.000Z" itemprop="datePublished">2017-04-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      daily-timeline.js——打造每日时间轴
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近因为需要在做会议室预约系统，其中需要用到一个显示当天预约情况的时间轴，去网上找了一下，发现只有和微博类似的历史时间轴，于是便自己动手做了一个当日时间轴控件（<a href="https://github.com/Yiiip/daily-timeline.js" target="_blank" rel="external">daily-timeline.js</a>），实际使用效果如下：</p>
+<p><img width="504px" height="400px" src="http://img.blog.csdn.net/20170408110538448?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="效果图"><br><a id="more"></a><br>原理是Canvas的绘制，难点不多都是基本操作，但要考虑坐标的关系，以及文本的相对居中这些细节的东西。</p>
+<p><strong>使用方法：</strong></p>
+<p><strong>1、创建canvas标签</strong>，id和daily-timeline.js中保持一致即可，宽高亦可修改，同时记得引入js</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;canvas id=&quot;dailyTimeline&quot; width=&quot;800px&quot; height=&quot;1440px&quot; style=&quot;&quot;&gt;&lt;/canvas&gt;</div><div class="line"></div><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;js/daily-timeline.js&quot;&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p><strong>2、绘制日程格子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">createSchedule(startTime, endTime, contentText);</div></pre></td></tr></table></figure>
+<p>参数：</p>
+<p>startTime，开始时间（格式”xx:xx”）<br>endTime，结束时间（格式”xx:xx”）<br>contentText，文本内容（可选）</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">createSchedule(&quot;08:20&quot;, &quot;09:10&quot;, &quot;吃饭&quot;);</div><div class="line">createSchedule(&quot;09:45&quot;, &quot;10:10&quot;, &quot;睡觉&quot;);</div><div class="line">createSchedule(&quot;11:20&quot;, &quot;13:00&quot;, &quot;打豆豆&quot;);</div></pre></td></tr></table></figure>
+<p>效果：</p>
+<p><img width="512px" src="http://img.blog.csdn.net/20170408121135933?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="日程格子"></p>
+<p><strong>3、空数据时显示友好提示</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drawEmptyView(&quot;今天还没有数据哦 ^_^&quot;);</div></pre></td></tr></table></figure>
+<p>说明：在实际运用中往往通过解析json来判断是否数据为空。</p>
+<p>效果：</p>
+<p><img width="512px" src="http://img.blog.csdn.net/20170408121911639?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvU2tpcHBlcktldmlu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="空数据"></p>
+<p><strong>4、重绘时间轴</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">redrawCanvas();</div></pre></td></tr></table></figure>
+<p>调用该方法后，重绘时间轴，清除时间轴里的所有日程格子。</p>
+<p><br><br>项目源码：<a href="https://github.com/Yiiip/daily-timeline.js" target="_blank" rel="external">https://github.com/Yiiip/daily-timeline.js</a></p>
+<p>（注：转载请遵循<a href="https://creativecommons.org/licenses/by-nc-nd/3.0/cn/" target="_blank" rel="external">CC-BY-NC-ND</a>协议）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/04/08/daily-timeline-js—打造每日时间轴/" data-id="cj18s306m00060snzp4s991op" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/10/网站评论功能数据库设计和开发/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网站评论功能数据库设计和开发</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android网络/">Android网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android自定义控件/">Android自定义控件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/接口设计/">接口设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库设计/">数据库设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/项目经验/">项目经验</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android网络/" style="font-size: 10px;">Android网络</a> <a href="/tags/Android自定义控件/" style="font-size: 15px;">Android自定义控件</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/接口设计/" style="font-size: 15px;">接口设计</a> <a href="/tags/数据库设计/" style="font-size: 20px;">数据库设计</a> <a href="/tags/项目经验/" style="font-size: 10px;">项目经验</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/08/daily-timeline-js—打造每日时间轴/">daily-timeline.js——打造每日时间轴</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/10/网站评论功能数据库设计和开发/">网站评论功能数据库设计和开发</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/02/Android贝塞尔曲线菜鸟起步/">Android贝塞尔曲线菜鸟起步</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/01/逻辑数据库设计-单纯的树-递归关系数据/">逻辑数据库设计-单纯的树(递归关系数据)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/21/标签系统-数据库设计/">标签系统 数据库设计</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liu Yingpeng<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/aboutme" class="mobile-nav-link">个人简历</a>
+  
+    <a href="http://blog.csdn.net/skipperkevin" class="mobile-nav-link">CSDN博客</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
